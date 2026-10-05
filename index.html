@@ -72,19 +72,15 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
-        .header-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            align-items: start;
+
+        /* Logo sopra l'intera griglia dell'header */
+        .top-logo-container {
+            margin-bottom: 3rem;
         }
 
-        /* Stile Logo posizionato a destra sopra ABOUT */
         .header-logo {
             display: inline-block;
             text-decoration: none;
-            margin-bottom: 2rem;
         }
 
         .header-logo img {
@@ -94,12 +90,23 @@
             display: block;
             object-fit: contain;
         }
+        
+        .header-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
 
         /* Adattamento per Cellulari e Tablet piccoli */
         @media (max-width: 768px) {
             .header-grid { 
                 grid-template-columns: 1fr; 
                 gap: 2.5rem;
+            }
+
+            .top-logo-container {
+                margin-bottom: 2rem;
             }
 
             .header-logo img {
@@ -396,6 +403,13 @@
 
     <!-- Header / Introduzione -->
     <header>
+        <!-- Logo Posizionato in Cima all'Header -->
+        <div class="top-logo-container">
+            <a href="./" class="header-logo">
+                <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
+            </a>
+        </div>
+
         <div class="header-grid">
             
             <!-- Colonna Sinistra: Nome e Titoli -->
@@ -409,13 +423,8 @@
                 </div>
             </div>
 
-            <!-- Colonna Destra: Logo + About / Vision + Contatti -->
+            <!-- Colonna Destra: About / Vision + Contatti -->
             <div>
-                <!-- Logo sopra About/Vision -->
-                <a href="./" class="header-logo">
-                    <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
-                </a>
-
                 <span class="meta-label">ABOUT / VISION</span>
                 <div class="about-quote">
                     "Because design doesn’t start polished."
