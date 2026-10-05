@@ -6,13 +6,16 @@
     <title>Antonio Cerini - Portfolio</title>
     <style>
         :root {
-            --primary: #10b981; /* Verde smeraldo moderno per i dettagli */
-            --bg: #111827;      /* Sfondo scuro elegante */
-            --card-bg: #1f2937;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --primary: #10b981;      /* Verde smeraldo */
+            --bg: #111827;           /* Sfondo scuro */
+            --card-bg: #1f2937;      /* Sfondo card */
+            --text-main: #f9fafb;    /* Testo principale */
+            --text-muted: #9ca3af;   /* Testo secondario */
+            --border: #374151;
         }
         
+        * { box-sizing: border-box; }
+
         body {
             font-family: system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
@@ -23,65 +26,140 @@
         }
         
         header {
-            padding: 6rem 1rem;
+            padding: 5rem 1.5rem 3rem 1.5rem;
             text-align: center;
-            border-bottom: 1px solid #374151;
+            border-bottom: 1px solid var(--border);
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         h1 { 
             margin: 0 0 0.5rem 0; 
-            font-size: 3.5rem; 
+            font-size: 3.2rem; 
             letter-spacing: -1px;
         }
         
         .subtitle { 
             color: var(--primary); 
             font-size: 1.25rem; 
-            margin: 0; 
-            font-weight: 500;
+            margin: 0 0 1rem 0; 
+            font-weight: 600;
         }
 
         .experience {
             color: var(--text-muted);
             font-size: 1rem;
-            margin-top: 1rem;
-            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-quote {
+            font-style: italic;
+            color: #d1d5db;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .contacts-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-btn {
+            color: var(--text-main);
+            text-decoration: none;
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .contact-btn:hover {
+            border-color: var(--primary);
         }
         
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 4rem 1rem;
+            padding: 3rem 1.5rem;
         }
         
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
         
         .card {
             background-color: var(--card-bg);
             border-radius: 12px;
-            padding: 1.75rem;
-            border: 1px solid #374151;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
         
         .card:hover { 
-            transform: translateY(-6px); 
+            transform: translateY(-4px); 
             border-color: var(--primary);
         }
         
         .card h3 { 
-            margin: 0 0 1rem 0; 
-            font-size: 1.4rem; 
+            margin: 0 0 0.5rem 0; 
+            font-size: 1.25rem; 
+        }
+
+        .card .spec {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
         }
         
         .card p { 
             color: var(--text-muted); 
-            margin-bottom: 1.5rem; 
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .award-card {
+            border-left: 4px solid var(--primary);
+            background-color: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .award-card h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; }
+        .award-card p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
+        .skills-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-group h4 {
+            margin: 0 0 0.75rem 0;
+            color: var(--text-main);
+            font-size: 1rem;
         }
         
         .tags { 
@@ -93,10 +171,19 @@
         .tag {
             background-color: rgba(16, 185, 129, 0.1);
             color: var(--primary);
-            padding: 0.35rem 0.8rem;
+            padding: 0.3rem 0.75rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 500;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -104,37 +191,133 @@
 
     <header>
         <h1>Antonio Cerini</h1>
-        <p class="subtitle">Product and Service Designer</p>
+        <p class="subtitle">Product & Service Designer</p>
         <p class="experience">
-            Yacht Designer at Spadolini Design Studio - 2025/26<br>
+            Yacht Designer at Design Studio Tommaso Spadolini (2025/26)<br>
             Architecture Student at present
         </p>
+
+        <div class="about-quote">
+            "Ho trasformato la mia passione in professione grazie a una visione precisa e a una costante dedizione ai risultati. Il mio percorso mi ha permesso di collaborare con menti brillanti su progetti di alto profilo, consolidando la mia convinzione che il successo sia un gioco di squadra."
+        </div>
+
+        <div class="contacts-bar">
+            <a href="mailto:antoniocerini27@gmail.com" class="contact-btn">✉ antoniocerini27@gmail.com</a>
+            <a href="tel:+393408922657" class="contact-btn">📞 +39 340 892 2657</a>
+        </div>
     </header>
 
     <div class="container">
-        <h2>I Miei Progetti</h2>
-        
-        <div class="grid">
-            <!-- Progetto 1 -->
-            <div class="card">
-                <h3>Titolo Primo Progetto</h3>
-                <p>Descrizione sintetica del progetto. Spiega qual era l'obiettivo principale, le sfide affrontate e quale soluzione hai ideato.</p>
+
+        <!-- Sezione Progetti -->
+        <section>
+            <h2>Progetti e Collaborazioni</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Piroscafo PATRIA</h3>
+                    <div class="spec">Lunghezza: 53,6 mt</div>
+                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Gozzo PATRONE 42</h3>
+                    <div class="spec">Lunghezza: 13,7 mt</div>
+                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Tender TYKUN XII</h3>
+                    <div class="spec">Lunghezza: 12,7 mt</div>
+                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Gozzo PATRONE 27</h3>
+                    <div class="spec">Lunghezza: 7,9 mt</div>
+                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                </div>
+
+                <div class="card">
+                    <h3>VILLALES CRETES</h3>
+                    <div class="spec">Progetto di Design</div>
+                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Riconoscimenti e Formazione -->
+        <section>
+            <h2>Riconoscimenti e Formazione</h2>
+            
+            <div class="award-card">
+                <h3>🏆 Attestato di "Laureato Eccellente" (2026)</h3>
+                <p>Facoltà di Architettura A.A. 2023-2024 — Fondazione Roma Sapienza, Università degli studi di Roma "La Sapienza"</p>
+            </div>
+
+            <div class="grid" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <h3>Master of Science in Product and Service Design</h3>
+                    <p>Università degli studi di Roma "La Sapienza" (2022 - 2024)</p>
+                </div>
+
+                <div class="card">
+                    <h3>Bachelor Degree in Design</h3>
+                    <p>Università degli studi di Roma "La Sapienza" (2019 - 2022)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Competenze -->
+        <section>
+            <h2>Competenze</h2>
+            
+            <div class="skills-group">
+                <h4>Software Skill</h4>
                 <div class="tags">
-                    <span class="tag">Design</span>
-                    <span class="tag">Strategia</span>
+                    <span class="tag">Rhinoceros</span>
+                    <span class="tag">AutoCAD</span>
+                    <span class="tag">Blender</span>
+                    <span class="tag">KeyShot</span>
+                    <span class="tag">Fusion 360</span>
+                    <span class="tag">Photoshop</span>
+                    <span class="tag">Illustrator</span>
+                    <span class="tag">InDesign</span>
+                    <span class="tag">Metashape</span>
                 </div>
             </div>
 
-            <!-- Progetto 2 -->
-            <div class="card">
-                <h3>Secondo Progetto</h3>
-                <p>Questo è un altro spazio per un tuo lavoro. In futuro, aggiungeremo delle immagini qui sopra per renderlo ancora più visivo e impattante.</p>
+            <div class="skills-group">
+                <h4>Design Skill</h4>
                 <div class="tags">
-                    <span class="tag">Sviluppo Web</span>
+                    <span class="tag">3D Prototyping</span>
+                    <span class="tag">Manual Prototyping</span>
+                    <span class="tag">Concept Ideation</span>
+                    <span class="tag">Sketching</span>
+                    <span class="tag">User Research</span>
+                    <span class="tag">Scenario Analysis</span>
+                    <span class="tag">CMF</span>
+                    <span class="tag">Project Communication</span>
                 </div>
             </div>
-        </div>
+
+            <div class="skills-group">
+                <h4>Personal Skill</h4>
+                <div class="tags">
+                    <span class="tag">Team Work</span>
+                    <span class="tag">Leadership</span>
+                    <span class="tag">Problem Solving</span>
+                    <span class="tag">Attention to Details</span>
+                    <span class="tag">Time Management</span>
+                    <span class="tag">Communication</span>
+                </div>
+            </div>
+        </section>
+
     </div>
+
+    <footer>
+        <p>© 2026 Antonio Cerini. Tutti i diritti riservati. I progetti mostrati sono di proprietà dei rispettivi detentori dei diritti.</p>
+    </footer>
 
 </body>
 </html>
