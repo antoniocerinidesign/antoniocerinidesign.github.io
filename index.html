@@ -187,6 +187,7 @@
             padding: 0.75rem 1.25rem;
             border: 1px solid var(--border);
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .contact-btn:hover {
@@ -435,6 +436,118 @@
             color: var(--accent-red);
         }
 
+        /* --- STILI MODALE CONTATTI --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            max-width: 550px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-red);
+        }
+
+        .modal-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-red);
+        }
+
+        .submit-btn {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: var(--text-main);
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-red);
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -481,7 +594,7 @@
                 </div>
                 
                 <div class="contacts-bar">
-                    <a href="mailto:antoniocerini27@gmail.com" class="contact-btn">✉ Email</a>
+                    <button type="button" class="contact-btn" id="openContactModal">✉ Email</button>
                     <a href="tel:+393408922657" class="contact-btn">📞 Telefono</a>
                 </div>
             </div>
@@ -688,12 +801,48 @@
 
     </div>
 
+    <!-- MODALE DI CONTATTO -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeContactModal">&times;</button>
+            
+            <span class="meta-label">CONTATTI</span>
+            <h2>Invia un messaggio</h2>
+            <p class="modal-subtitle">Compila il modulo per inviare un'email diretta ad Antonio Cerini.</p>
+
+            <form action="https://formsubmit.co/antoniocerini27@gmail.com" method="POST" class="contact-form">
+                <!-- Disabilita il CAPTCHA di FormSubmit se desideri un invio più veloce -->
+                <input type="hidden" name="_captcha" value="false">
+                <!-- Pagina di conferma opzionale o reindirizzamento -->
+                <input type="hidden" name="_template" value="table">
+
+                <div class="form-group">
+                    <label for="user_email">La tua Email</label>
+                    <input type="email" id="user_email" name="email" placeholder="nome@esempio.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Oggetto</label>
+                    <input type="text" id="subject" name="_subject" placeholder="Richiesta informazioni / Progetto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Invia Messaggio</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED. DESIGNED FOR ARCHITECTURE & PRODUCT DESIGN.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Logica Carosello
             const slides = document.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             let currentIndex = 0;
@@ -723,6 +872,21 @@
                     autoSlide = setInterval(nextSlide, slideInterval);
                 });
             });
+
+            // Logica Modale Contatti
+            const openBtn = document.getElementById('openContactModal');
+            const closeBtn = document.getElementById('closeContactModal');
+            const modal = document.getElementById('contactModal');
+
+            if (openBtn && modal && closeBtn) {
+                openBtn.addEventListener('click', () => modal.classList.add('active'));
+                closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+                
+                // Chiusura cliccando sullo sfondo scuro fuori dalla modale
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.classList.remove('active');
+                });
+            }
         });
     </script>
 
