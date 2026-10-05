@@ -3,163 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antonio Cerini - Portfolio</title>
+    <title>ANTONIO CERINI — Portfolio</title>
+    
+    <!-- Importazione Font di Design da Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #10b981;      /* Verde smeraldo */
-            --bg: #111827;           /* Sfondo scuro */
-            --card-bg: #1f2937;      /* Sfondo card */
-            --text-main: #f9fafb;    /* Testo principale */
-            --text-muted: #9ca3af;   /* Testo secondario */
-            --border: #374151;
+            --bg: #F4F2ED;            /* Sfondo caldo e naturale tipo carta/pietra */
+            --card-bg: #FFFFFF;       /* Sfondo schede bianco puro */
+            --text-main: #121212;     /* Testo nero profondo */
+            --text-muted: #666460;    /* Testo secondario grigio/marrone caldo */
+            --border: #DCD8CF;        /* Linee di griglia sottili */
+            --accent: #121212;
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-serif: 'Instrument Serif', serif;
+            --font-body: 'Inter', sans-serif;
         }
         
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
         
-        header {
-            padding: 5rem 1.5rem 3rem 1.5rem;
-            text-align: center;
+        /* Barra Superiore Architetturale */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
             border-bottom: 1px solid var(--border);
-            max-width: 900px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .top-bar-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: #10b981;
+            border-radius: 50%;
+        }
+
+        /* Hero / Header Section */
+        header {
+            padding: 5rem 2rem 4rem 2rem;
+            border-bottom: 1px solid var(--border);
+            max-width: 1200px;
             margin: 0 auto;
         }
         
+        .header-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .header-grid { grid-template-columns: 1fr; }
+        }
+
+        .meta-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
         h1 { 
-            margin: 0 0 0.5rem 0; 
-            font-size: 3.2rem; 
-            letter-spacing: -1px;
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5.5rem); 
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
         
         .subtitle { 
-            color: var(--primary); 
-            font-size: 1.25rem; 
-            margin: 0 0 1rem 0; 
-            font-weight: 600;
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem); 
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-main);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
         }
 
-        .experience {
+        .experience-list {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
             color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 2rem;
+            line-height: 1.8;
+            border-left: 1px solid var(--border);
+            padding-left: 1.25rem;
         }
 
         .about-quote {
-            font-style: italic;
-            color: #d1d5db;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid var(--primary);
-            padding: 1rem 1.25rem;
-            text-align: left;
-            border-radius: 0 8px 8px 0;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 2px;
         }
 
         .contacts-bar {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         .contact-btn {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--text-main);
             text-decoration: none;
             background: var(--card-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
             border: 1px solid var(--border);
-            font-size: 0.9rem;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         .contact-btn:hover {
-            border-color: var(--primary);
+            background: var(--text-main);
+            color: var(--bg);
+            border-color: var(--text-main);
         }
         
+        /* Main Layout Container */
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 4rem 2rem;
         }
         
         section {
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
         }
 
         h2 {
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
-        .grid {
+        .section-num {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Progetti Grid in Stile Editoriale */
+        .grid-projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
         
-        .card {
+        .card-project {
             background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
             border: 1px solid var(--border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
         
-        .card:hover { 
-            transform: translateY(-4px); 
-            border-color: var(--primary);
+        .card-project:hover { 
+            border-color: var(--text-main);
+            transform: translateY(-3px);
         }
         
-        .card h3 { 
-            margin: 0 0 0.5rem 0; 
-            font-size: 1.25rem; 
-        }
-
-        .card .spec {
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        
-        .card p { 
-            color: var(--text-muted); 
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        .award-card {
-            border-left: 4px solid var(--primary);
-            background-color: var(--card-bg);
-            padding: 1.25rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .award-card h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; }
-        .award-card p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
-
-        .skills-group {
+        .card-project .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        .skills-group h4 {
-            margin: 0 0 0.75rem 0;
+        .card-project h3 { 
+            font-family: var(--font-display);
+            font-size: 1.6rem; 
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .card-project .spec {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-project .studio { 
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
             color: var(--text-main);
-            font-size: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        /* Riconoscimenti e Formazione */
+        .award-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .award-icon {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+        }
+
+        .award-card h3 { 
+            font-family: var(--font-display);
+            font-size: 1.2rem; 
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .award-card p { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+        }
+
+        /* Competenze Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skills-group {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1.75rem;
+        }
+
+        .skills-group h4 {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
         }
         
         .tags { 
@@ -169,41 +322,63 @@
         }
         
         .tag {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--primary);
-            padding: 0.3rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            font-family: var(--font-display);
+            background-color: var(--bg);
+            color: var(--text-main);
+            padding: 0.4rem 0.75rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
         }
 
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 2rem 1rem;
             border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            background-color: var(--bg);
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Bar Architetturale -->
+    <div class="top-bar">
+        <span>LOCATION: ROMA, IT</span>
+        <span>PORTFOLIO / 2026</span>
+        <span class="top-bar-status"><span class="dot"></span> DISPONIBILE PER PROGETTI</span>
+    </div>
+
+    <!-- Header / Introduzione -->
     <header>
-        <h1>Antonio Cerini</h1>
-        <p class="subtitle">Product & Service Designer</p>
-        <p class="experience">
-            Yacht Designer at Design Studio Tommaso Spadolini (2025/26)<br>
-            Architecture Student at present
-        </p>
+        <div class="header-grid">
+            <div>
+                <span class="meta-label">PRODUCT & SERVICE DESIGNER</span>
+                <h1>ANTONIO<br>CERINI</h1>
+                <p class="subtitle">Architecture Student & Yacht Designer</p>
+                <div class="experience-list">
+                    Design Studio Tommaso Spadolini — 2025/26<br>
+                    Università degli Studi di Roma "La Sapienza"
+                </div>
+            </div>
 
-        <div class="about-quote">
-            "Ho trasformato la mia passione in professione grazie a una visione precisa e a una costante dedizione ai risultati. Il mio percorso mi ha permesso di collaborare con menti brillanti su progetti di alto profilo, consolidando la mia convinzione che il successo sia un gioco di squadra."
-        </div>
-
-        <div class="contacts-bar">
-            <a href="mailto:antoniocerini27@gmail.com" class="contact-btn">✉ antoniocerini27@gmail.com</a>
-            <a href="tel:+393408922657" class="contact-btn">📞 +39 340 892 2657</a>
+            <div>
+                <span class="meta-label">ABOUT / VISION</span>
+                <div class="about-quote">
+                    "Ho trasformato la mia passione in professione grazie a una visione precisa e a una costante dedizione ai risultati. È dal confronto e dalla sinergia tra creativi che nascono le opere di maggior valore."
+                </div>
+                
+                <div class="contacts-bar">
+                    <a href="mailto:antoniocerini27@gmail.com" class="contact-btn">✉ Email</a>
+                    <a href="tel:+393408922657" class="contact-btn">📞 Telefono</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -211,104 +386,156 @@
 
         <!-- Sezione Progetti -->
         <section>
-            <h2>Progetti e Collaborazioni</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Piroscafo PATRIA</h3>
-                    <div class="spec">Lunghezza: 53,6 mt</div>
-                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+            <div class="section-header">
+                <h2>SELECTED WORK</h2>
+                <span class="section-num">/ 01</span>
+            </div>
+            
+            <div class="grid-projects">
+                <!-- Progetto 1 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>NAVAL DESIGN</span>
+                            <span>2025/26</span>
+                        </div>
+                        <h3>Piroscafo PATRIA</h3>
+                        <div class="spec">Lunghezza: 53,6 mt</div>
+                    </div>
+                    <div class="studio">Design Studio Tommaso Spadolini</div>
                 </div>
 
-                <div class="card">
-                    <h3>Gozzo PATRONE 42</h3>
-                    <div class="spec">Lunghezza: 13,7 mt</div>
-                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                <!-- Progetto 2 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>YACHT DESIGN</span>
+                            <span>2025/26</span>
+                        </div>
+                        <h3>Gozzo PATRONE 42</h3>
+                        <div class="spec">Lunghezza: 13,7 mt</div>
+                    </div>
+                    <div class="studio">Design Studio Tommaso Spadolini</div>
                 </div>
 
-                <div class="card">
-                    <h3>Tender TYKUN XII</h3>
-                    <div class="spec">Lunghezza: 12,7 mt</div>
-                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                <!-- Progetto 3 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>TENDER DESIGN</span>
+                            <span>2025/26</span>
+                        </div>
+                        <h3>Tender TYKUN XII</h3>
+                        <div class="spec">Lunghezza: 12,7 mt</div>
+                    </div>
+                    <div class="studio">Design Studio Tommaso Spadolini</div>
                 </div>
 
-                <div class="card">
-                    <h3>Gozzo PATRONE 27</h3>
-                    <div class="spec">Lunghezza: 7,9 mt</div>
-                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                <!-- Progetto 4 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>YACHT DESIGN</span>
+                            <span>2025/26</span>
+                        </div>
+                        <h3>Gozzo PATRONE 27</h3>
+                        <div class="spec">Lunghezza: 7,9 mt</div>
+                    </div>
+                    <div class="studio">Design Studio Tommaso Spadolini</div>
                 </div>
 
-                <div class="card">
-                    <h3>VILLALES CRETES</h3>
-                    <div class="spec">Progetto di Design</div>
-                    <p>Design Studio Tommaso Spadolini (2025/26)</p>
+                <!-- Progetto 5 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>DESIGN CONCEPT</span>
+                            <span>2025/26</span>
+                        </div>
+                        <h3>VILLALES CRETES</h3>
+                        <div class="spec">Progetto di Design</div>
+                    </div>
+                    <div class="studio">Design Studio Tommaso Spadolini</div>
                 </div>
             </div>
         </section>
 
         <!-- Sezione Riconoscimenti e Formazione -->
         <section>
-            <h2>Riconoscimenti e Formazione</h2>
+            <div class="section-header">
+                <h2>RECOGNITION & EDUCATION</h2>
+                <span class="section-num">/ 02</span>
+            </div>
             
             <div class="award-card">
-                <h3>🏆 Attestato di "Laureato Eccellente" (2026)</h3>
-                <p>Facoltà di Architettura A.A. 2023-2024 — Fondazione Roma Sapienza, Università degli studi di Roma "La Sapienza"</p>
+                <div class="award-icon">AWARD 2026</div>
+                <div>
+                    <h3>Attestato di "Laureato Eccellente"</h3>
+                    <p>Facoltà di Architettura A.A. 2023-2024 — Fondazione Roma Sapienza, Università degli studi di Roma "La Sapienza"</p>
+                </div>
             </div>
 
-            <div class="grid" style="margin-top: 1.5rem;">
-                <div class="card">
-                    <h3>Master of Science in Product and Service Design</h3>
-                    <p>Università degli studi di Roma "La Sapienza" (2022 - 2024)</p>
+            <div class="grid-projects" style="margin-top: 1.5rem;">
+                <div class="card-project" style="min-height: auto;">
+                    <div class="card-meta"><span>MASTER DEGREE</span><span>2022 — 2024</span></div>
+                    <h3 style="font-size: 1.2rem;">Master of Science in Product and Service Design</h3>
+                    <div class="studio">Università degli studi di Roma "La Sapienza"</div>
                 </div>
 
-                <div class="card">
-                    <h3>Bachelor Degree in Design</h3>
-                    <p>Università degli studi di Roma "La Sapienza" (2019 - 2022)</p>
+                <div class="card-project" style="min-height: auto;">
+                    <div class="card-meta"><span>BACHELOR DEGREE</span><span>2019 — 2022</span></div>
+                    <h3 style="font-size: 1.2rem;">Bachelor Degree in Design</h3>
+                    <div class="studio">Università degli studi di Roma "La Sapienza"</div>
                 </div>
             </div>
         </section>
 
         <!-- Sezione Competenze -->
         <section>
-            <h2>Competenze</h2>
+            <div class="section-header">
+                <h2>COMPETENCES</h2>
+                <span class="section-num">/ 03</span>
+            </div>
             
-            <div class="skills-group">
-                <h4>Software Skill</h4>
-                <div class="tags">
-                    <span class="tag">Rhinoceros</span>
-                    <span class="tag">AutoCAD</span>
-                    <span class="tag">Blender</span>
-                    <span class="tag">KeyShot</span>
-                    <span class="tag">Fusion 360</span>
-                    <span class="tag">Photoshop</span>
-                    <span class="tag">Illustrator</span>
-                    <span class="tag">InDesign</span>
-                    <span class="tag">Metashape</span>
+            <div class="skills-grid">
+                <div class="skills-group">
+                    <h4>SOFTWARE SKILLS</h4>
+                    <div class="tags">
+                        <span class="tag">Rhinoceros</span>
+                        <span class="tag">AutoCAD</span>
+                        <span class="tag">Blender</span>
+                        <span class="tag">KeyShot</span>
+                        <span class="tag">Fusion 360</span>
+                        <span class="tag">Photoshop</span>
+                        <span class="tag">Illustrator</span>
+                        <span class="tag">InDesign</span>
+                        <span class="tag">Metashape</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="skills-group">
-                <h4>Design Skill</h4>
-                <div class="tags">
-                    <span class="tag">3D Prototyping</span>
-                    <span class="tag">Manual Prototyping</span>
-                    <span class="tag">Concept Ideation</span>
-                    <span class="tag">Sketching</span>
-                    <span class="tag">User Research</span>
-                    <span class="tag">Scenario Analysis</span>
-                    <span class="tag">CMF</span>
-                    <span class="tag">Project Communication</span>
+                <div class="skills-group">
+                    <h4>DESIGN SKILLS</h4>
+                    <div class="tags">
+                        <span class="tag">3D Prototyping</span>
+                        <span class="tag">Manual Prototyping</span>
+                        <span class="tag">Concept Ideation</span>
+                        <span class="tag">Sketching</span>
+                        <span class="tag">User Research</span>
+                        <span class="tag">Scenario Analysis</span>
+                        <span class="tag">CMF</span>
+                        <span class="tag">Project Communication</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="skills-group">
-                <h4>Personal Skill</h4>
-                <div class="tags">
-                    <span class="tag">Team Work</span>
-                    <span class="tag">Leadership</span>
-                    <span class="tag">Problem Solving</span>
-                    <span class="tag">Attention to Details</span>
-                    <span class="tag">Time Management</span>
-                    <span class="tag">Communication</span>
+                <div class="skills-group">
+                    <h4>PERSONAL SKILLS</h4>
+                    <div class="tags">
+                        <span class="tag">Team Work</span>
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Problem Solving</span>
+                        <span class="tag">Attention to Details</span>
+                        <span class="tag">Time Management</span>
+                        <span class="tag">Communication</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -316,7 +543,7 @@
     </div>
 
     <footer>
-        <p>© 2026 Antonio Cerini. Tutti i diritti riservati. I progetti mostrati sono di proprietà dei rispettivi detentori dei diritti.</p>
+        <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED. DESIGNED FOR ARCHITECTURE & PRODUCT DESIGN.</p>
     </footer>
 
 </body>
