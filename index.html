@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mio Portfolio</title>
+    <style>
+        :root {
+            --primary: #10b981; /* Verde smeraldo moderno per i dettagli */
+            --bg: #111827;      /* Sfondo scuro elegante */
+            --card-bg: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        header {
+            padding: 6rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #374151;
+        }
+        
+        h1 { 
+            margin: 0 0 0.5rem 0; 
+            font-size: 3.5rem; 
+            letter-spacing: -1px;
+        }
+        
+        .subtitle { 
+            color: var(--primary); 
+            font-size: 1.25rem; 
+            margin: 0; 
+            font-weight: 500;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid #374151;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .card:hover { 
+            transform: translateY(-6px); 
+            border-color: var(--primary);
+        }
+        
+        .card h3 { 
+            margin: 0 0 1rem 0; 
+            font-size: 1.4rem; 
+        }
+        
+        .card p { 
+            color: var(--text-muted); 
+            margin-bottom: 1.5rem; 
+        }
+        
+        .tags { 
+            display: flex; 
+            gap: 0.5rem; 
+            flex-wrap: wrap; 
+        }
+        
+        .tag {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>[Il Tuo Nome]</h1>
+        <p class="subtitle">Creativo / Sviluppatore / Designer</p>
+    </header>
+
+    <div class="container">
+        <h2>I Miei Progetti</h2>
+        
+        <div class="grid">
+            <!-- Progetto 1 -->
+            <div class="card">
+                <h3>Titolo Primo Progetto</h3>
+                <p>Descrizione sintetica del progetto. Spiega qual era l'obiettivo principale, le sfide affrontate e quale soluzione hai ideato.</p>
+                <div class="tags">
+                    <span class="tag">Design</span>
+                    <span class="tag">Strategia</span>
+                </div>
+            </div>
+
+            <!-- Progetto 2 -->
+            <div class="card">
+                <h3>Secondo Progetto</h3>
+                <p>Questo è un altro spazio per un tuo lavoro. In futuro, aggiungeremo delle immagini qui sopra per renderlo ancora più visivo e impattante.</p>
+                <div class="tags">
+                    <span class="tag">Sviluppo Web</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
