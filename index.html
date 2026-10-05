@@ -80,21 +80,21 @@
             align-items: start;
         }
 
-        /* Wrapper per affiancare Logo e Nome */
+        /* Wrapper per affiancare Nome e Logo */
         .name-logo-wrapper {
             display: flex;
             align-items: center; 
             gap: 2.5rem;         
         }
 
-        /* Stile Logo Ingrandito */
+        /* Stile Logo */
         .logo {
             text-decoration: none;
             flex-shrink: 0; 
         }
 
         .logo img {
-            height: 280px;     /* <-- Ingrandito ulteriormente da 200 a 280px */
+            height: 280px;     
             width: auto;
             display: block;
             object-fit: contain;
@@ -111,7 +111,7 @@
             }
 
             .logo img {
-                height: 180px; /* <-- Ingrandito anche su smartphone */
+                height: 180px; 
             }
         }
 
@@ -406,12 +406,8 @@
     <header>
         <div class="header-grid">
             
-            <!-- Inizio Gruppo Logo + Nome -->
+            <!-- Inizio Gruppo Nome + Logo (Logo a destra) -->
             <div class="name-logo-wrapper">
-                <a href="./" class="logo">
-                    <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
-                </a>
-                
                 <div class="name-content">
                     <span class="meta-label">DESIGN PORTFOLIO</span>
                     <h1>ANTONIO<br>CERINI</h1>
@@ -421,8 +417,12 @@
                         Architecture Student at present
                     </div>
                 </div>
+
+                <a href="./" class="logo">
+                    <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
+                </a>
             </div>
-            <!-- Fine Gruppo Logo + Nome -->
+            <!-- Fine Gruppo Nome + Logo -->
 
             <!-- Blocco Descrizione e Contatti -->
             <div>
