@@ -67,10 +67,23 @@
 
         /* Hero / Header Section */
         header {
-            padding: 5rem 2rem 4rem 2rem;
+            padding: 4rem 2rem 4rem 2rem;
             border-bottom: 1px solid var(--border);
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* Stile Logo */
+        .logo {
+            display: inline-block;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;      /* Imposta l'altezza desiderata */
+            width: auto;       /* Mantiene le proporzioni corrette */
+            display: block;
         }
         
         .header-grid {
@@ -373,6 +386,11 @@
 
     <!-- Header / Introduzione -->
     <header>
+        <!-- Logo del sito -->
+        <a href="/" class="logo">
+            <img src="logo.png" alt="Antonio Cerini Logo">
+        </a>
+
         <div class="header-grid">
             <div>
                 <span class="meta-label">DESIGN PORTFOLIO</span>
