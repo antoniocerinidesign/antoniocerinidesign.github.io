@@ -80,21 +80,21 @@
             align-items: start;
         }
 
-        /* Nuovo Wrapper per affiancare Logo e Nome */
+        /* Wrapper per affiancare Logo e Nome */
         .name-logo-wrapper {
             display: flex;
-            align-items: center; /* Allinea il logo al centro rispetto al testo */
-            gap: 2.5rem;         /* Spazio tra logo e testo */
+            align-items: center; 
+            gap: 2.5rem;         
         }
 
-        /* Stile Logo Aggiornato */
+        /* Stile Logo Ingrandito */
         .logo {
             text-decoration: none;
-            flex-shrink: 0; /* Impedisce al logo di rimpicciolirsi se c'è poco spazio */
+            flex-shrink: 0; 
         }
 
         .logo img {
-            height: 200px;     /* Grandezza proporzionata al blocco di testo */
+            height: 280px;     /* <-- Ingrandito ulteriormente da 200 a 280px */
             width: auto;
             display: block;
             object-fit: contain;
@@ -105,13 +105,13 @@
             .header-grid { grid-template-columns: 1fr; }
             
             .name-logo-wrapper {
-                flex-direction: column; /* Incolonna logo e testo su schermi piccoli */
+                flex-direction: column; 
                 align-items: flex-start;
                 gap: 1.5rem;
             }
 
             .logo img {
-                height: 140px; /* Leggermente più piccolo su smartphone */
+                height: 180px; /* <-- Ingrandito anche su smartphone */
             }
         }
 
