@@ -810,11 +810,12 @@
             <h2>Invia un messaggio</h2>
             <p class="modal-subtitle">Compila il modulo per inviare un'email diretta ad Antonio Cerini.</p>
 
-            <form action="https://formsubmit.co/antoniocerini27@gmail.com" method="POST" class="contact-form">
-                <!-- Disabilita il CAPTCHA di FormSubmit se desideri un invio più veloce -->
+            <form action="https://formsubmit.co/antoniocerini27@gmail.com" method="POST" class="contact-form" id="contactForm">
+                <!-- Disabilita il CAPTCHA di FormSubmit -->
                 <input type="hidden" name="_captcha" value="false">
-                <!-- Pagina di conferma opzionale o reindirizzamento -->
-                <input type="hidden" name="_template" value="table">
+                
+                <!-- URL dinamico di reindirizzamento dopo l'invio -->
+                <input type="hidden" name="_next" id="nextUrl" value="">
 
                 <div class="form-group">
                     <label for="user_email">La tua Email</label>
@@ -877,14 +878,31 @@
             const openBtn = document.getElementById('openContactModal');
             const closeBtn = document.getElementById('closeContactModal');
             const modal = document.getElementById('contactModal');
+            const contactForm = document.getElementById('contactForm');
+            const nextUrlInput = document.getElementById('nextUrl');
+
+            // Imposta in automatico l'URL della pagina attuale per il ritorno dopo l'invio
+            if (nextUrlInput) {
+                nextUrlInput.value = window.location.href;
+            }
+
+            // Funzione per chiudere la modale e resettare i campi
+            function closeModal() {
+                modal.classList.remove('active');
+                if (contactForm) contactForm.reset();
+            }
 
             if (openBtn && modal && closeBtn) {
-                openBtn.addEventListener('click', () => modal.classList.add('active'));
-                closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+                openBtn.addEventListener('click', () => {
+                    if (contactForm) contactForm.reset();
+                    modal.classList.add('active');
+                });
+                
+                closeBtn.addEventListener('click', closeModal);
                 
                 // Chiusura cliccando sullo sfondo scuro fuori dalla modale
                 modal.addEventListener('click', (e) => {
-                    if (e.target === modal) modal.classList.remove('active');
+                    if (e.target === modal) closeModal();
                 });
             }
         });
