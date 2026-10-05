@@ -72,21 +72,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        /* Stile Logo */
-        .logo {
-            display: inline-block;
-            margin-bottom: 2rem;
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 120px;     
-            width: auto;
-            max-width: 100%;
-            display: block;
-            object-fit: contain;
-        }
         
         .header-grid {
             display: grid;
@@ -95,8 +80,39 @@
             align-items: start;
         }
 
+        /* Nuovo Wrapper per affiancare Logo e Nome */
+        .name-logo-wrapper {
+            display: flex;
+            align-items: center; /* Allinea il logo al centro rispetto al testo */
+            gap: 2.5rem;         /* Spazio tra logo e testo */
+        }
+
+        /* Stile Logo Aggiornato */
+        .logo {
+            text-decoration: none;
+            flex-shrink: 0; /* Impedisce al logo di rimpicciolirsi se c'è poco spazio */
+        }
+
+        .logo img {
+            height: 200px;     /* Grandezza proporzionata al blocco di testo */
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Adattamento per Cellulari e Tablet piccoli */
         @media (max-width: 768px) {
             .header-grid { grid-template-columns: 1fr; }
+            
+            .name-logo-wrapper {
+                flex-direction: column; /* Incolonna logo e testo su schermi piccoli */
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .logo img {
+                height: 140px; /* Leggermente più piccolo su smartphone */
+            }
         }
 
         .meta-label {
@@ -388,22 +404,27 @@
 
     <!-- Header / Introduzione -->
     <header>
-        <!-- Logo del sito con link a logo2.png -->
-        <a href="./" class="logo">
-            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
-        </a>
-
         <div class="header-grid">
-            <div>
-                <span class="meta-label">DESIGN PORTFOLIO</span>
-                <h1>ANTONIO<br>CERINI</h1>
-                <p class="subtitle">Product and Service Designer</p>
-                <div class="experience-list">
-                    Yacht Designer for Spadolini Design Studio — 2025/26<br>
-                    Architecture Student at present
+            
+            <!-- Inizio Gruppo Logo + Nome -->
+            <div class="name-logo-wrapper">
+                <a href="./" class="logo">
+                    <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
+                </a>
+                
+                <div class="name-content">
+                    <span class="meta-label">DESIGN PORTFOLIO</span>
+                    <h1>ANTONIO<br>CERINI</h1>
+                    <p class="subtitle">Product and Service Designer</p>
+                    <div class="experience-list">
+                        Yacht Designer for Spadolini Design Studio — 2025/26<br>
+                        Architecture Student at present
+                    </div>
                 </div>
             </div>
+            <!-- Fine Gruppo Logo + Nome -->
 
+            <!-- Blocco Descrizione e Contatti -->
             <div>
                 <span class="meta-label">ABOUT / VISION</span>
                 <div class="about-quote">
@@ -415,6 +436,7 @@
                     <a href="tel:+393408922657" class="contact-btn">📞 Telefono</a>
                 </div>
             </div>
+
         </div>
     </header>
 
