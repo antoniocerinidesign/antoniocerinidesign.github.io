@@ -80,38 +80,30 @@
             align-items: start;
         }
 
-        /* Wrapper per affiancare Nome e Logo */
-        .name-logo-wrapper {
-            display: flex;
-            align-items: center; 
-            gap: 2.5rem;         
-        }
-
-        /* Stile Logo */
-        .logo {
+        /* Stile Logo posizionato a destra sopra ABOUT */
+        .header-logo {
+            display: inline-block;
             text-decoration: none;
-            flex-shrink: 0; 
+            margin-bottom: 2rem;
         }
 
-        .logo img {
-            height: 280px;     
+        .header-logo img {
+            height: 220px;
             width: auto;
+            max-width: 100%;
             display: block;
             object-fit: contain;
         }
 
         /* Adattamento per Cellulari e Tablet piccoli */
         @media (max-width: 768px) {
-            .header-grid { grid-template-columns: 1fr; }
-            
-            .name-logo-wrapper {
-                flex-direction: column; 
-                align-items: flex-start;
-                gap: 1.5rem;
+            .header-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2.5rem;
             }
 
-            .logo img {
-                height: 180px; 
+            .header-logo img {
+                height: 160px; 
             }
         }
 
@@ -406,26 +398,24 @@
     <header>
         <div class="header-grid">
             
-            <!-- Inizio Gruppo Nome + Logo (Logo a destra) -->
-            <div class="name-logo-wrapper">
-                <div class="name-content">
-                    <span class="meta-label">DESIGN PORTFOLIO</span>
-                    <h1>ANTONIO<br>CERINI</h1>
-                    <p class="subtitle">Product and Service Designer</p>
-                    <div class="experience-list">
-                        Yacht Designer for Spadolini Design Studio — 2025/26<br>
-                        Architecture Student at present
-                    </div>
+            <!-- Colonna Sinistra: Nome e Titoli -->
+            <div class="name-content">
+                <span class="meta-label">DESIGN PORTFOLIO</span>
+                <h1>ANTONIO<br>CERINI</h1>
+                <p class="subtitle">Product and Service Designer</p>
+                <div class="experience-list">
+                    Yacht Designer for Spadolini Design Studio — 2025/26<br>
+                    Architecture Student at present
                 </div>
+            </div>
 
-                <a href="./" class="logo">
+            <!-- Colonna Destra: Logo + About / Vision + Contatti -->
+            <div>
+                <!-- Logo sopra About/Vision -->
+                <a href="./" class="header-logo">
                     <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
                 </a>
-            </div>
-            <!-- Fine Gruppo Nome + Logo -->
 
-            <!-- Blocco Descrizione e Contatti -->
-            <div>
                 <span class="meta-label">ABOUT / VISION</span>
                 <div class="about-quote">
                     "Because design doesn’t start polished."
