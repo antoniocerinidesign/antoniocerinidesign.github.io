@@ -691,7 +691,7 @@
         }
 
         .lightbox-content {
-            max-width: 80vw; /* Ridotto leggermente per fare spazio ai bottoni */
+            max-width: 80vw;
             max-height: 85vh;
             object-fit: contain;
             border: 1px solid var(--border);
@@ -861,16 +861,12 @@
             </div>
             
             <div class="projects-carousel-track" id="projectTrack">
+                
+                <!-- PROGETTO 01 MODIFICATO -->
                 <div class="card-project">
                     <div>
-                        <div class="card-meta">
-                            <span>CONCEPT DESIGN</span>
-                            <span>2026</span>
-                        </div>
-                        <h3>Progetto Personale 01</h3>
-                        <div class="spec">Concept & Exploration</div>
+                        <h3>01 - AUTO CONCEPT</h3>
                     </div>
-                    <div class="studio">Personal Work</div>
                 </div>
 
                 <div class="card-project">
@@ -1190,127 +1186,114 @@
 
             // Intercetta il click su qualsiasi immagine del Carosello1
             const carouselImgs = Array.from(document.querySelectorAll('.carousel-section .carousel-slide img'));
-            let currentLightboxIndex = 0;
-
-            function updateLightboxImage(index) {
-                if (carouselImgs[index] && carouselImgs[index].src) {
-                    lightboxImg.src = carouselImgs[index].src;
-                    lightboxImg.alt = carouselImgs[index].alt || 'Immagine Ingrandita';
-                    currentLightboxIndex = index;
-                }
-            }
+            let currentLightboxIndex = -1;
 
             carouselImgs.forEach((img, index) => {
-                img.addEventListener('click', () => {
-                    updateLightboxImage(index);
-                    lightboxModal.classList.add('active');
-                    clearInterval(autoSlide); // Opzionale: ferma il carosello in background quando aperto
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const src = img.getAttribute('src');
+                    const alt = img.getAttribute('alt');
+                    
+                    currentLightboxIndex = index;
+                    openLightbox(src, alt);
                 });
             });
 
+            function openLightbox(src, alt) {
+                if (src) {
+                    lightboxImg.setAttribute('src', src);
+                    lightboxImg.setAttribute('alt', alt || 'Immagine ingrandita');
+                    lightboxModal.classList.add('active');
+                }
+            }
+
             function closeLightbox() {
-                if (lightboxModal) {
-                    lightboxModal.classList.remove('active');
-                    lightboxImg.src = '';
-                    autoSlide = setInterval(nextSlide, slideInterval); // Riparte il carosello in background
-                }
-            }
-
-            function prevLightboxImage() {
-                let newIndex = currentLightboxIndex === 0 ? carouselImgs.length - 1 : currentLightboxIndex - 1;
-                updateLightboxImage(newIndex);
-            }
-
-            function nextLightboxImage() {
-                let newIndex = currentLightboxIndex === carouselImgs.length - 1 ? 0 : currentLightboxIndex + 1;
-                updateLightboxImage(newIndex);
-            }
-
-            if (lightboxModal) {
-                if (closeLightboxBtn) {
-                    closeLightboxBtn.addEventListener('click', closeLightbox);
-                }
-
-                if (prevLightboxBtn && nextLightboxBtn) {
-                    prevLightboxBtn.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Evita la chiusura del modale se clicchi sul pulsante
-                        prevLightboxImage();
-                    });
-
-                    nextLightboxBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        nextLightboxImage();
-                    });
-                }
-                
-                lightboxModal.addEventListener('click', (e) => {
-                    // Chiudi solo se si clicca sullo sfondo o sulla x, non sull'immagine o sui bottoni
-                    if (e.target === lightboxModal) closeLightbox();
-                });
-
-                // Controllo da tastiera per chiudere (ESC) e navigare (Frecce DX/SX)
-                document.addEventListener('keydown', (e) => {
-                    if (lightboxModal.classList.contains('active')) {
-                        if (e.key === 'Escape') closeLightbox();
-                        if (e.key === 'ArrowLeft') prevLightboxImage();
-                        if (e.key === 'ArrowRight') nextLightboxImage();
+                lightboxModal.classList.remove('active');
+                // Svuota src dopo la transizione per evitare sfarfallii
+                setTimeout(() => {
+                    if (!lightboxModal.classList.contains('active')) {
+                        lightboxImg.setAttribute('src', '');
                     }
-                });
+                }, 300);
             }
 
-            // Logica Carosello Orizzontale Progetti Personali
-            const track = document.getElementById('projectTrack');
-            const btnPrev = document.getElementById('prevProject');
-            const btnNext = document.getElementById('nextProject');
+            function navigateLightbox(direction) {
+                if (currentLightboxIndex === -1 || carouselImgs.length === 0) return;
+                currentLightboxIndex = (currentLightboxIndex + direction + carouselImgs.length) % carouselImgs.length;
+                const nextImg = carouselImgs[currentLightboxIndex];
+                lightboxImg.setAttribute('src', nextImg.getAttribute('src'));
+                lightboxImg.setAttribute('alt', nextImg.getAttribute('alt') || 'Immagine ingrandita');
+            }
+
+            closeLightboxBtn.addEventListener('click', closeLightbox);
             
-            if (track && btnPrev && btnNext) {
-                btnNext.addEventListener('click', () => {
-                    const card = track.querySelector('.card-project');
-                    if (!card) return;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.gap) || 24; 
-                    track.scrollBy({ left: card.offsetWidth + gap, behavior: 'smooth' });
-                });
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) {
+                    closeLightbox();
+                }
+            });
 
-                btnPrev.addEventListener('click', () => {
-                    const card = track.querySelector('.card-project');
-                    if (!card) return;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.gap) || 24; 
-                    track.scrollBy({ left: -(card.offsetWidth + gap), behavior: 'smooth' });
-                });
-            }
+            prevLightboxBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateLightbox(-1);
+            });
+
+            nextLightboxBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateLightbox(1);
+            });
+
+            // Navigazione Lightbox con tastiera
+            document.addEventListener('keydown', (e) => {
+                if (lightboxModal.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                    if (e.key === 'ArrowRight') navigateLightbox(1);
+                }
+            });
+
+            // Logica Scorrimento Progetti Personali
+            const track = document.getElementById('projectTrack');
+            const prevBtn = document.getElementById('prevProject');
+            const nextBtn = document.getElementById('nextProject');
+
+            const scrollAmount = track.clientWidth > 768 ? track.clientWidth / 2 : track.clientWidth;
+
+            nextBtn.addEventListener('click', () => {
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+
+            prevBtn.addEventListener('click', () => {
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
 
             // Logica Modale Contatti
+            const modal = document.getElementById('contactModal');
             const openBtn = document.getElementById('openContactModal');
             const closeBtn = document.getElementById('closeContactModal');
-            const modal = document.getElementById('contactModal');
-            const contactForm = document.getElementById('contactForm');
             const nextUrlInput = document.getElementById('nextUrl');
 
-            if (nextUrlInput) {
-                nextUrlInput.value = window.location.href;
-            }
+            // Imposta l'URL di redirect sulla pagina corrente
+            nextUrlInput.value = window.location.href;
 
-            function closeModal() {
+            openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeBtn.addEventListener('click', () => {
                 modal.classList.remove('active');
-                if (contactForm) contactForm.reset();
-            }
+                document.body.style.overflow = '';
+            });
 
-            if (openBtn && modal && closeBtn) {
-                openBtn.addEventListener('click', () => {
-                    if (contactForm) contactForm.reset();
-                    modal.classList.add('active');
-                });
-                
-                closeBtn.addEventListener('click', closeModal);
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeModal();
-                });
-            }
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
         });
     </script>
-
 </body>
 </html>
