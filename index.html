@@ -243,7 +243,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            cursor: pointer; /* Indica che l'immagine è cliccabile per l'ingrandimento */
+            cursor: pointer; 
             transition: filter 0.2s ease;
         }
 
@@ -251,7 +251,6 @@
             filter: brightness(0.95);
         }
 
-        /* Segnaposto stilizzato per immagini mancanti */
         .placeholder-slide {
             display: flex;
             flex-direction: column;
@@ -692,7 +691,7 @@
         }
 
         .lightbox-content {
-            max-width: 90vw;
+            max-width: 80vw; /* Ridotto leggermente per fare spazio ai bottoni */
             max-height: 85vh;
             object-fit: contain;
             border: 1px solid var(--border);
@@ -720,6 +719,39 @@
 
         .lightbox-close:hover {
             color: var(--accent-red);
+        }
+
+        /* Nuovi stili per i bottoni di navigazione Lightbox */
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            border: none;
+            font-size: 2rem;
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            z-index: 2010;
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-prev { left: 0.5rem; padding: 0.8rem; }
+            .lightbox-next { right: 0.5rem; padding: 0.8rem; }
         }
 
         footer {
@@ -1080,6 +1112,8 @@
     <!-- MODALE LIGHTBOX PER INGRANDIMENTO IMMAGINI -->
     <div id="imageLightboxModal" class="lightbox-modal">
         <button class="lightbox-close" id="closeLightboxModal">&times;</button>
+        <button class="lightbox-nav-btn lightbox-prev" id="prevLightboxBtn">&#10094;</button>
+        <button class="lightbox-nav-btn lightbox-next" id="nextLightboxBtn">&#10095;</button>
         <img class="lightbox-content" id="lightboxImg" src="" alt="Immagine Ingrandita">
     </div>
 
@@ -1147,21 +1181,30 @@
 
             let autoSlide = setInterval(nextSlide, slideInterval);
 
-            // Logica Lightbox Ingrandimento Immagini Carosello 1
+            // Logica Lightbox Ingrandimento Immagini con Navigazione
             const lightboxModal = document.getElementById('imageLightboxModal');
             const lightboxImg = document.getElementById('lightboxImg');
             const closeLightboxBtn = document.getElementById('closeLightboxModal');
+            const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+            const nextLightboxBtn = document.getElementById('nextLightboxBtn');
 
             // Intercetta il click su qualsiasi immagine del Carosello1
-            const carouselImgs = document.querySelectorAll('.carousel-section .carousel-slide img');
+            const carouselImgs = Array.from(document.querySelectorAll('.carousel-section .carousel-slide img'));
+            let currentLightboxIndex = 0;
 
-            carouselImgs.forEach(img => {
+            function updateLightboxImage(index) {
+                if (carouselImgs[index] && carouselImgs[index].src) {
+                    lightboxImg.src = carouselImgs[index].src;
+                    lightboxImg.alt = carouselImgs[index].alt || 'Immagine Ingrandita';
+                    currentLightboxIndex = index;
+                }
+            }
+
+            carouselImgs.forEach((img, index) => {
                 img.addEventListener('click', () => {
-                    if (img.src) {
-                        lightboxImg.src = img.src;
-                        lightboxImg.alt = img.alt || 'Immagine Ingrandita';
-                        lightboxModal.classList.add('active');
-                    }
+                    updateLightboxImage(index);
+                    lightboxModal.classList.add('active');
+                    clearInterval(autoSlide); // Opzionale: ferma il carosello in background quando aperto
                 });
             });
 
@@ -1169,19 +1212,48 @@
                 if (lightboxModal) {
                     lightboxModal.classList.remove('active');
                     lightboxImg.src = '';
+                    autoSlide = setInterval(nextSlide, slideInterval); // Riparte il carosello in background
                 }
             }
 
-            if (closeLightboxBtn && lightboxModal) {
-                closeLightboxBtn.addEventListener('click', closeLightbox);
+            function prevLightboxImage() {
+                let newIndex = currentLightboxIndex === 0 ? carouselImgs.length - 1 : currentLightboxIndex - 1;
+                updateLightboxImage(newIndex);
+            }
+
+            function nextLightboxImage() {
+                let newIndex = currentLightboxIndex === carouselImgs.length - 1 ? 0 : currentLightboxIndex + 1;
+                updateLightboxImage(newIndex);
+            }
+
+            if (lightboxModal) {
+                if (closeLightboxBtn) {
+                    closeLightboxBtn.addEventListener('click', closeLightbox);
+                }
+
+                if (prevLightboxBtn && nextLightboxBtn) {
+                    prevLightboxBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Evita la chiusura del modale se clicchi sul pulsante
+                        prevLightboxImage();
+                    });
+
+                    nextLightboxBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        nextLightboxImage();
+                    });
+                }
                 
                 lightboxModal.addEventListener('click', (e) => {
+                    // Chiudi solo se si clicca sullo sfondo o sulla x, non sull'immagine o sui bottoni
                     if (e.target === lightboxModal) closeLightbox();
                 });
 
+                // Controllo da tastiera per chiudere (ESC) e navigare (Frecce DX/SX)
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
-                        closeLightbox();
+                    if (lightboxModal.classList.contains('active')) {
+                        if (e.key === 'Escape') closeLightbox();
+                        if (e.key === 'ArrowLeft') prevLightboxImage();
+                        if (e.key === 'ArrowRight') nextLightboxImage();
                     }
                 });
             }
