@@ -492,11 +492,40 @@
             align-items: center;
             text-align: center;
             padding: 4rem 2rem;
+            position: relative; /* Necessario per l'immagine di copertina */
+            overflow: hidden;   /* Necessario per mantenere l'immagine all'interno */
         }
 
         .projects-carousel-track .card-project h3 { 
             font-size: 2.5rem; 
             margin-bottom: 0;
+            position: relative; 
+            z-index: 2;
+        }
+
+        /* --- STILI IMMAGINE COPERTINA PROGETTI --- */
+        .project-cover-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .projects-carousel-track .card-project:hover .project-cover-img {
+            transform: scale(1.03);
+        }
+
+        .project-title-badge {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border);
+            padding: 1.5rem 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .award-card {
@@ -889,9 +918,10 @@
                 
                 <div class="projects-carousel-track" id="projectTrack">
                     
-                    <!-- Riquadro 01 -->
+                    <!-- Riquadro 01 con Immagine Copertina -->
                     <div class="card-project">
-                        <div>
+                        <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Cover" class="project-cover-img">
+                        <div class="project-title-badge">
                             <h3>01 - AUTO CONCEPT</h3>
                         </div>
                     </div>
@@ -1136,7 +1166,6 @@
             let currentIndex = 0;
             const slideInterval = 4500;
 
-            // 1. Gestione dinamica degli errori di caricamento immagini
             slides.forEach((slide) => {
                 const img = slide.querySelector('img');
                 if (img) {
@@ -1151,7 +1180,6 @@
                 }
             });
 
-            // 2. Generazione automatica dei pallini in base al numero reale di slide
             if (dotsContainer && slides.length > 0) {
                 dotsContainer.innerHTML = '';
                 slides.forEach((_, idx) => {
@@ -1260,7 +1288,7 @@
                 }
             });
 
-            // Logica Scorrimento Progetti Personali (Controlli Testata + Controlli Laterali)
+            // Logica Scorrimento Progetti Personali
             const track = document.getElementById('projectTrack');
             const prevBtn = document.getElementById('prevProject');
             const nextBtn = document.getElementById('nextProject');
