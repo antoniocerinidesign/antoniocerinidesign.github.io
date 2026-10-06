@@ -451,27 +451,9 @@
             padding: 4rem 2rem;
         }
 
-        .projects-carousel-track .card-project .card-meta {
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
         .projects-carousel-track .card-project h3 { 
             font-size: 2.5rem; 
-            margin-bottom: 1rem;
-        }
-
-        .projects-carousel-track .card-project .spec {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-        
-        .projects-carousel-track .card-project .studio { 
-            border-top: none;
-            margin-top: 0;
-            font-size: 0.85rem;
+            margin-bottom: 0;
         }
 
         .award-card {
@@ -721,7 +703,7 @@
             color: var(--accent-red);
         }
 
-        /* Nuovi stili per i bottoni di navigazione Lightbox */
+        /* Bottoni di navigazione Lightbox */
         .lightbox-nav-btn {
             position: absolute;
             top: 50%;
@@ -749,6 +731,7 @@
             right: 2rem;
         }
 
+        /* Media queries sistemate e chiuse correttamente */
         @media (max-width: 768px) {
             .lightbox-prev { left: 0.5rem; padding: 0.8rem; }
             .lightbox-next { right: 0.5rem; padding: 0.8rem; }
@@ -862,60 +845,41 @@
             
             <div class="projects-carousel-track" id="projectTrack">
                 
-                <!-- PROGETTO 01 MODIFICATO -->
+                <!-- Riquadro 01 -->
                 <div class="card-project">
                     <div>
                         <h3>01 - AUTO CONCEPT</h3>
                     </div>
                 </div>
 
+                <!-- Riquadro 02 -->
                 <div class="card-project">
                     <div>
-                        <div class="card-meta">
-                            <span>PRODUCT DESIGN</span>
-                            <span>2026</span>
-                        </div>
-                        <h3>Progetto Personale 02</h3>
-                        <div class="spec">Prototipazione & CMF</div>
+                        <h3>02 - NOME PROGETTO</h3>
                     </div>
-                    <div class="studio">Personal Work</div>
                 </div>
 
+                <!-- Riquadro 03 -->
                 <div class="card-project">
                     <div>
-                        <div class="card-meta">
-                            <span>3D MODELING</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 03</h3>
-                        <div class="spec">Modellazione & KeyShot</div>
+                        <h3>03 - NOME PROGETTO</h3>
                     </div>
-                    <div class="studio">Personal Work</div>
                 </div>
 
+                <!-- Riquadro 04 -->
                 <div class="card-project">
                     <div>
-                        <div class="card-meta">
-                            <span>RESEARCH</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 04</h3>
-                        <div class="spec">User Research & Scenario</div>
+                        <h3>04 - NOME PROGETTO</h3>
                     </div>
-                    <div class="studio">Personal Work</div>
                 </div>
 
+                <!-- Riquadro 05 -->
                 <div class="card-project">
                     <div>
-                        <div class="card-meta">
-                            <span>EXPERIMENTAL</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 05</h3>
-                        <div class="spec">Design Sperimentale</div>
+                        <h3>05 - NOME PROGETTO</h3>
                     </div>
-                    <div class="studio">Personal Work</div>
                 </div>
+                
             </div>
         </section>
 
