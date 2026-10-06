@@ -245,7 +245,6 @@
             display: block;
         }
 
-        /* Segnaposto stilizzato per immagini mancanti */
         .placeholder-slide {
             display: flex;
             flex-direction: column;
@@ -435,22 +434,39 @@
             display: none; 
         }
 
+        /* MODIFICA: Ogni progetto nel carosello personale occupa ora il 100% per creare un "grande carosello" */
         .projects-carousel-track .card-project {
-            flex: 0 0 calc(33.333% - 1rem); 
-            scroll-snap-align: start;
+            flex: 0 0 100%; 
+            scroll-snap-align: center;
             min-width: 0;
+            min-height: 400px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
         }
 
-        @media (max-width: 900px) {
-            .projects-carousel-track .card-project {
-                flex: 0 0 calc(50% - 0.75rem);
-            }
+        .projects-carousel-track .card-project .card-meta {
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
         }
 
-        @media (max-width: 600px) {
-            .projects-carousel-track .card-project {
-                flex: 0 0 100%;
-            }
+        .projects-carousel-track .card-project h3 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+        }
+
+        .projects-carousel-track .card-project .spec {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .projects-carousel-track .card-project .studio { 
+            border-top: none;
+            margin-top: 0;
+            font-size: 0.85rem;
         }
 
         .award-card {
