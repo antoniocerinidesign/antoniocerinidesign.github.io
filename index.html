@@ -245,7 +245,6 @@
             display: block;
         }
 
-        /* Segnaposto stilizzato per immagini mancanti */
         .placeholder-slide {
             display: flex;
             flex-direction: column;
@@ -268,11 +267,6 @@
             font-weight: 600;
             color: var(--accent-red);
             margin-bottom: 0.5rem;
-        }
-
-        .placeholder-slide small {
-            font-size: 0.75rem;
-            opacity: 0.7;
         }
 
         .carousel-dots {
@@ -323,6 +317,7 @@
             color: var(--accent-red);
         }
 
+        /* CARD STANDARD (Per Selected Work) */
         .grid-projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -389,734 +384,291 @@
             margin-top: auto;
         }
 
-        /* --- CAROSELLO PROGETTI PERSONALI --- */
-        .header-left-group {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
+        /* --- NUOVO CAROSELLO PROGETTI PERSONALI (BOX GRANDE) --- */
+        .projects-wrapper {
+            position: relative;
+            width: 100%;
         }
 
-        .project-arrows {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .arrow-btn {
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
             background: var(--card-bg);
             border: 1px solid var(--border);
             color: var(--text-main);
-            width: 32px;
-            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
-        .arrow-btn:hover {
+        .nav-arrow:hover {
             border-color: var(--accent-red);
             color: var(--accent-red);
+            transform: translateY(-50%) scale(1.05);
         }
+
+        #prevProject { left: -26px; }
+        #nextProject { right: -26px; }
 
         .projects-carousel-track {
             display: flex;
-            gap: 1.5rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding: 10px 0;
             scrollbar-width: none; 
-            -ms-overflow-style: none; 
+            -ms-overflow-style: none;
+            padding: 5px 0; /* Previene il taglio dell'hover */
         }
 
         .projects-carousel-track::-webkit-scrollbar {
             display: none; 
         }
 
-        .projects-carousel-track .card-project {
-            flex: 0 0 calc(33.333% - 1rem); 
-            scroll-snap-align: start;
-            min-width: 0;
-        }
-
-        @media (max-width: 900px) {
-            .projects-carousel-track .card-project {
-                flex: 0 0 calc(50% - 0.75rem);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .projects-carousel-track .card-project {
-                flex: 0 0 100%;
-            }
-        }
-
-        .award-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .award-icon {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.5rem 0.75rem;
-            background: var(--bg);
-            border: 1px solid var(--accent-red);
-            color: var(--accent-red);
-        }
-
-        .award-card h3 { 
-            font-family: var(--font-display);
-            font-size: 1.2rem; 
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        
-        .award-card p { 
-            color: var(--text-muted); 
-            font-size: 0.9rem; 
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skills-group {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1.75rem;
-        }
-
-        .skills-group h4 {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .tags { 
-            display: flex; 
-            gap: 0.5rem; 
-            flex-wrap: wrap; 
-        }
-        
-        .tag {
-            font-family: var(--font-display);
-            background-color: var(--bg);
-            color: var(--text-main);
-            padding: 0.4rem 0.75rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
-        }
-
-        .tag:hover {
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-        }
-
-        /* --- STILI MODALE CONTATTI --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.6);
-            backdrop-filter: blur(4px);
-            display: flex;
+        /* Variazione estetica per la card grande (1 solo progetto visibile) */
+        .card-project.single-project {
+            flex: 0 0 100%; /* Occupa tutto lo spazio visibile */
+            scroll-snap-align: center;
+            min-height: 380px;
+            padding: 3.5rem 5rem; /* Margini più ampi */
             justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            padding: 1rem;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            max-width: 550px;
-            width: 100%;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1.25rem;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .modal-close:hover {
-            color: var(--accent-red);
-        }
-
-        .modal-subtitle {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .card-project.single-project h3 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-top: 1rem;
             margin-bottom: 1.5rem;
         }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+        .card-project.single-project .spec {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
+        /* Adattamento frecce e box su schermi piccoli */
+        @media (max-width: 768px) {
+            #prevProject { left: -12px; width: 44px; height: 44px; font-size: 1.2rem; }
+            #nextProject { right: -12px; width: 44px; height: 44px; font-size: 1.2rem; }
+            
+            .card-project.single-project {
+                padding: 2.5rem 3rem;
+                min-height: 320px;
+            }
         }
+        @media (max-width: 480Per ottenere un singolo grande box con effetto a scorrimento (carousel/slider), la struttura migliore prevede un contenitore principale con "overflow nascosto" e una riga interna (la *track*) che si sposta orizzontalmente applicando una transizione CSS.
 
-        .form-group label {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-main);
-        }
+Copia e incolla questo codice in un unico file HTML (oppure dividilo nei tuoi file CSS e JS se preferisci). Il codice include un design pulito e reattivo, frecce posizionate internamente ai lati e logica JavaScript per lo slide circolare continuo.
 
-        .form-group input,
-        .form-group textarea {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            padding: 0.75rem 1rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
+```html
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider Progetti</title>
+  <style>
+    /* Stili generali di base per la pagina (opzionali) */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent-red);
-        }
+    /* Contenitore principale dello slider (Il Grande Box) */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px; /* Larghezza massima del tuo box */
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden; /* Nasconde i progetti fuori dal box */
+    }
 
-        .submit-btn {
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            background: var(--text-main);
-            color: #FFFFFF;
-            border: none;
-            padding: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: 0.5rem;
-        }
+    /* Pista dove scorrono i progetti */
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out; /* Effetto scorrimento fluido */
+    }
 
-        .submit-btn:hover {
-            background: var(--accent-red);
-        }
+    /* Singolo progetto */
+    .project-slide {
+      min-width: 100%; /* Ogni box occupa il 100% dello spazio visibile */
+      box-sizing: border-box;
+      padding: 60px 80px;
+      text-align: center;
+    }
 
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
-            text-align: center;
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            background-color: var(--bg);
-        }
-    </style>
+    .project-slide img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    .project-slide h2 {
+      margin: 0 0 15px;
+      color: #333;
+      font-size: 2em;
+    }
+
+    .project-slide p {
+      color: #666;
+      line-height: 1.6;
+      font-size: 1.1em;
+      margin-bottom: 25px;
+    }
+
+    .btn-scopri {
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-scopri:hover {
+      background-color: #0056b3;
+    }
+
+    /* Frecce di navigazione */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .arrow-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev-btn {
+      left: 20px;
+    }
+
+    .next-btn {
+      right: 20px;
+    }
+
+    /* Responsività per schermi più piccoli */
+    @media (max-width: 768px) {
+      .project-slide {
+        padding: 40px 20px;
+      }
+      .arrow-btn {
+        width: 40px;
+        height: 40px;
+      }
+      .prev-btn { left: 10px; }
+      .next-btn { right: 10px; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <span>LOCATION: ROMA, IT</span>
-        <span>PORTFOLIO / 2026</span>
-        <span class="top-bar-status"><span class="dot"></span> DISPONIBILE PER PROGETTI</span>
-    </div>
+  <div class="slider-container">
+    
+    <!-- Freccia Sinistra -->
+    <button class="arrow-btn prev-btn" id="prevBtn">&#10094;</button>
 
-    <header>
-        <div class="top-logo-container">
-            <a href="./" class="header-logo">
-                <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/logo2.png?raw=true" alt="Antonio Cerini Logo">
-            </a>
-        </div>
+    <!-- Pista scorrevole -->
+    <div class="slider-track" id="sliderTrack">
+      
+      <!-- PROGETTO 1 -->
+      <div class="project-slide">
+        <h2>Progetto Alpha</h2>
+        <p>Un design minimalista che si concentra sull'usabilità. Questo progetto è stato realizzato per ottimizzare l'esperienza utente riducendo gli elementi di disturbo visivo a schermo.</p>
+        <a href="#" class="btn-scopri">Scopri di più</a>
+      </div>
 
-        <div class="header-grid">
-            <div class="name-content">
-                <span class="meta-label">DESIGN PORTFOLIO</span>
-                <h1>ANTONIO<br>CERINI</h1>
-                <p class="subtitle">Product and Service Designer</p>
-                <div class="experience-list">
-                    Yacht Designer for Spadolini Design Studio — 2025/26<br>
-                    Architecture Student at present
-                </div>
-            </div>
+      <!-- PROGETTO 2 -->
+      <div class="project-slide">
+        <h2>Progetto Beta</h2>
+        <p>Integrazione di sistemi avanzati di scorrimento. L'obiettivo principale di questo layout era mantenere alta l'attenzione tramite transizioni fluide e mirate.</p>
+        <a href="#" class="btn-scopri">Scopri di più</a>
+      </div>
 
-            <div>
-                <span class="meta-label">ABOUT / VISION</span>
-                <div class="about-quote">
-                    "Because design doesn’t start polished."
-                </div>
-                
-                <div class="contacts-bar">
-                    <button type="button" class="contact-btn" id="openContactModal">✉ Email</button>
-                    <a href="tel:+393408922657" class="contact-btn">📞 Telefono</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-
-        <!-- CAROSELLO DISSOLVENZA -->
-        <section class="carousel-section">
-            <div class="carousel-container">
-                
-                <div class="carousel-slide active">
-                    <img src="Carosello1/Keyshot_Render_Vecchie_Planimetrie_6.24.jpg" alt="Render 01">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Keyshot_Render_Vecchie_Planimetrie_7.25.jpg" alt="Render 02">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Keyshot_Render_Vecchie_Planimetrie_8.26.jpg" alt="Render 03">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Keyshot_Render_Vecchie_Planimetrie_9.27.jpg" alt="Render 04">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Keyshot_Render_Vecchie_Planimetrie_10.28.jpg" alt="Render 05">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Tavolo_prova_1.7.jpg" alt="Tavolo Prova 1.7">
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="Carosello1/Tavolo_prova_1.9.jpg" alt="Tavolo Prova 1.9">
-                </div>
-
-                <!-- I pallini vengono generati automaticamente via JS -->
-                <div class="carousel-dots" id="carouselDots"></div>
-
-            </div>
-        </section>
-
-        <!-- SEZIONE PROGETTI PERSONALI -->
-        <section>
-            <div class="section-header">
-                <div class="header-left-group">
-                    <h2>PERSONAL PROJECTS</h2>
-                    <div class="project-arrows">
-                        <button id="prevProject" class="arrow-btn" type="button">&#8592;</button>
-                        <button id="nextProject" class="arrow-btn" type="button">&#8594;</button>
-                    </div>
-                </div>
-                <span class="section-num">/ 01</span>
-            </div>
-            
-            <div class="projects-carousel-track" id="projectTrack">
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>CONCEPT DESIGN</span>
-                            <span>2026</span>
-                        </div>
-                        <h3>Progetto Personale 01</h3>
-                        <div class="spec">Concept & Exploration</div>
-                    </div>
-                    <div class="studio">Personal Work</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>PRODUCT DESIGN</span>
-                            <span>2026</span>
-                        </div>
-                        <h3>Progetto Personale 02</h3>
-                        <div class="spec">Prototipazione & CMF</div>
-                    </div>
-                    <div class="studio">Personal Work</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>3D MODELING</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 03</h3>
-                        <div class="spec">Modellazione & KeyShot</div>
-                    </div>
-                    <div class="studio">Personal Work</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>RESEARCH</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 04</h3>
-                        <div class="spec">User Research & Scenario</div>
-                    </div>
-                    <div class="studio">Personal Work</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>EXPERIMENTAL</span>
-                            <span>2025</span>
-                        </div>
-                        <h3>Progetto Personale 05</h3>
-                        <div class="spec">Design Sperimentale</div>
-                    </div>
-                    <div class="studio">Personal Work</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEZIONE PROGETTI SELEZIONATI -->
-        <section>
-            <div class="section-header">
-                <h2>SELECTED WORK</h2>
-                <span class="section-num">/ 02</span>
-            </div>
-            
-            <div class="grid-projects">
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>YACHT DESIGN</span>
-                            <span>2025/26</span>
-                        </div>
-                        <h3>Piroscafo PATRIA</h3>
-                        <div class="spec">Lunghezza: 53,6 mt</div>
-                    </div>
-                    <div class="studio">Design Studio Tommaso Spadolini</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>YACHT DESIGN</span>
-                            <span>2025/26</span>
-                        </div>
-                        <h3>Gozzo PATRONE 42</h3>
-                        <div class="spec">Lunghezza: 13,7 mt</div>
-                    </div>
-                    <div class="studio">Design Studio Tommaso Spadolini</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>YACHT DESIGN</span>
-                            <span>2025/26</span>
-                        </div>
-                        <h3>Tender TYKUN XII</h3>
-                        <div class="spec">Lunghezza: 12,7 mt</div>
-                    </div>
-                    <div class="studio">Design Studio Tommaso Spadolini</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>YACHT DESIGN</span>
-                            <span>2025/26</span>
-                        </div>
-                        <h3>Gozzo PATRONE 27</h3>
-                        <div class="spec">Lunghezza: 7,9 mt</div>
-                    </div>
-                    <div class="studio">Design Studio Tommaso Spadolini</div>
-                </div>
-
-                <div class="card-project">
-                    <div>
-                        <div class="card-meta">
-                            <span>ARCHITECTURE PROJECT</span>
-                            <span>2025/26</span>
-                        </div>
-                        <h3>Villa Les Cretes</h3>
-                        <div class="spec">Progettazione Abitativa</div>
-                    </div>
-                    <div class="studio">Design Studio Tommaso Spadolini</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEZIONE RICONOSCIMENTI -->
-        <section>
-            <div class="section-header">
-                <h2>RECOGNITION & EDUCATION</h2>
-                <span class="section-num">/ 03</span>
-            </div>
-            
-            <div class="award-card">
-                <div class="award-icon">AWARD 2026</div>
-                <div>
-                    <h3>Attestato di "Laureato Eccellente"</h3>
-                    <p>Facoltà di Architettura A.A. 2023-2024 — Fondazione Roma Sapienza, Università degli studi di Roma "La Sapienza"</p>
-                </div>
-            </div>
-
-            <div class="grid-projects" style="margin-top: 1.5rem;">
-                <div class="card-project" style="min-height: auto;">
-                    <div class="card-meta"><span>MASTER DEGREE</span><span>2022 — 2024</span></div>
-                    <h3 style="font-size: 1.2rem;">Master of Science in Product and Service Design</h3>
-                    <div class="studio">Università degli studi di Roma "La Sapienza"</div>
-                </div>
-
-                <div class="card-project" style="min-height: auto;">
-                    <div class="card-meta"><span>BACHELOR DEGREE</span><span>2019 — 2022</span></div>
-                    <h3 style="font-size: 1.2rem;">Bachelor Degree in Design</h3>
-                    <div class="studio">Università degli studi di Roma "La Sapienza"</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEZIONE COMPETENZE -->
-        <section>
-            <div class="section-header">
-                <h2>COMPETENCES</h2>
-                <span class="section-num">/ 04</span>
-            </div>
-            
-            <div class="skills-grid">
-                <div class="skills-group">
-                    <h4>SOFTWARE SKILLS</h4>
-                    <div class="tags">
-                        <span class="tag">Rhinoceros</span>
-                        <span class="tag">AutoCAD</span>
-                        <span class="tag">Blender</span>
-                        <span class="tag">KeyShot</span>
-                        <span class="tag">Fusion 360</span>
-                        <span class="tag">Photoshop</span>
-                        <span class="tag">Illustrator</span>
-                        <span class="tag">InDesign</span>
-                        <span class="tag">Metashape</span>
-                    </div>
-                </div>
-
-                <div class="skills-group">
-                    <h4>DESIGN SKILLS</h4>
-                    <div class="tags">
-                        <span class="tag">3D Prototyping</span>
-                        <span class="tag">Manual Prototyping</span>
-                        <span class="tag">Concept Ideation</span>
-                        <span class="tag">Sketching</span>
-                        <span class="tag">User Research</span>
-                        <span class="tag">Scenario Analysis</span>
-                        <span class="tag">CMF</span>
-                        <span class="tag">Project Communication</span>
-                    </div>
-                </div>
-
-                <div class="skills-group">
-                    <h4>PERSONAL SKILLS</h4>
-                    <div class="tags">
-                        <span class="tag">Team Work</span>
-                        <span class="tag">Leadership</span>
-                        <span class="tag">Problem Solving</span>
-                        <span class="tag">Attention to Details</span>
-                        <span class="tag">Time Management</span>
-                        <span class="tag">Communication</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- PROGETTO 3 -->
+      <div class="project-slide">
+        <h2>Progetto Gamma</h2>
+        <p>Sviluppo di componenti web reattivi. Un progetto dedicato alla creazione di interfacce scalabili che si adattano perfettamente sia su desktop che su dispositivi mobili.</p>
+        <a href="#" class="btn-scopri">Scopri di più</a>
+      </div>
 
     </div>
 
-    <!-- MODALE DI CONTATTO -->
-    <div id="contactModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" id="closeContactModal">&times;</button>
-            
-            <span class="meta-label">CONTATTI</span>
-            <h2>Invia un messaggio</h2>
-            <p class="modal-subtitle">Compila il modulo per inviare un'email diretta ad Antonio Cerini.</p>
+    <!-- Freccia Destra -->
+    <button class="arrow-btn next-btn" id="nextBtn">&#10095;</button>
 
-            <form action="https://formsubmit.co/antoniocerini27@gmail.com" method="POST" class="contact-form" id="contactForm">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" id="nextUrl" value="">
+  </div>
 
-                <div class="form-group">
-                    <label for="user_email">La tua Email</label>
-                    <input type="email" id="user_email" name="email" placeholder="nome@esempio.com" required>
-                </div>
+  <script>
+    const sliderTrack = document.getElementById('sliderTrack');
+    const slides = document.querySelectorAll('.project-slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-                <div class="form-group">
-                    <label for="subject">Oggetto</label>
-                    <input type="text" id="subject" name="_subject" placeholder="Richiesta informazioni / Progetto" required>
-                </div>
+    let currentIndex = 0;
+    const totalSlides = slides.length;
 
-                <div class="form-group">
-                    <label for="message">Messaggio</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
-                </div>
+    // Funzione per aggiornare la posizione dello slider
+    function updateSliderPosition() {
+      // Calcola di quanto deve spostarsi la "pista" a sinistra (in percentuale)
+      const translateXValue = -(currentIndex * 100);
+      sliderTrack.style.transform = `translateX(${translateXValue}%)`;
+    }
 
-                <button type="submit" class="submit-btn">Invia Messaggio</button>
-            </form>
-        </div>
-    </div>
+    // Evento click freccia destra
+    nextBtn.addEventListener('click', () => {
+      // Se siamo all'ultimo progetto, torna al primo. Altrimenti vai avanti.
+      if (currentIndex === totalSlides - 1) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+      updateSliderPosition();
+    });
 
-    <footer>
-        <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED. DESIGNED FOR ARCHITECTURE & PRODUCT DESIGN.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Logica Carosello a Dissolvenza Robustizzata
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dotsContainer = document.getElementById('carouselDots');
-            let currentIndex = 0;
-            const slideInterval = 4500;
-
-            // 1. Gestione dinamica degli errori di caricamento immagini
-            slides.forEach((slide) => {
-                const img = slide.querySelector('img');
-                if (img) {
-                    img.addEventListener('error', () => {
-                        const altText = img.getAttribute('alt') || 'Immagine del progetto';
-                        const srcText = img.getAttribute('src');
-                        slide.innerHTML = `<div class="placeholder-slide">
-                            <span>[ Immagine non trovata ]</span>
-                            <small>${altText} — ${srcText}</small>
-                        </div>`;
-                    });
-                }
-            });
-
-            // 2. Generazione automatica dei pallini in base al numero reale di slide
-            if (dotsContainer && slides.length > 0) {
-                dotsContainer.innerHTML = '';
-                slides.forEach((_, idx) => {
-                    const dot = document.createElement('span');
-                    dot.classList.add('carousel-dot');
-                    if (idx === 0) dot.classList.add('active');
-                    
-                    dot.addEventListener('click', () => {
-                        clearInterval(autoSlide);
-                        currentIndex = idx;
-                        showSlide(currentIndex);
-                        autoSlide = setInterval(nextSlide, slideInterval);
-                    });
-                    
-                    dotsContainer.appendChild(dot);
-                });
-            }
-
-            function showSlide(index) {
-                const dots = document.querySelectorAll('.carousel-dot');
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-            }
-
-            function nextSlide() {
-                if (slides.length === 0) return;
-                currentIndex = (currentIndex + 1) % slides.length;
-                showSlide(currentIndex);
-            }
-
-            let autoSlide = setInterval(nextSlide, slideInterval);
-
-            // Logica Carosello Orizzontale Progetti Personali
-            const track = document.getElementById('projectTrack');
-            const btnPrev = document.getElementById('prevProject');
-            const btnNext = document.getElementById('nextProject');
-            
-            if (track && btnPrev && btnNext) {
-                btnNext.addEventListener('click', () => {
-                    const card = track.querySelector('.card-project');
-                    if (!card) return;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.gap) || 24; 
-                    track.scrollBy({ left: card.offsetWidth + gap, behavior: 'smooth' });
-                });
-
-                btnPrev.addEventListener('click', () => {
-                    const card = track.querySelector('.card-project');
-                    if (!card) return;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.gap) || 24; 
-                    track.scrollBy({ left: -(card.offsetWidth + gap), behavior: 'smooth' });
-                });
-            }
-
-            // Logica Modale Contatti
-            const openBtn = document.getElementById('openContactModal');
-            const closeBtn = document.getElementById('closeContactModal');
-            const modal = document.getElementById('contactModal');
-            const contactForm = document.getElementById('contactForm');
-            const nextUrlInput = document.getElementById('nextUrl');
-
-            if (nextUrlInput) {
-                nextUrlInput.value = window.location.href;
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-                if (contactForm) contactForm.reset();
-            }
-
-            if (openBtn && modal && closeBtn) {
-                openBtn.addEventListener('click', () => {
-                    if (contactForm) contactForm.reset();
-                    modal.classList.add('active');
-                });
-                
-                closeBtn.addEventListener('click', closeModal);
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeModal();
-                });
-            }
-        });
-    </script>
+    // Evento click freccia sinistra
+    prevBtn.addEventListener('click', () => {
+      // Se siamo al primo progetto, vai all'ultimo. Altrimenti torna indietro.
+      if (currentIndex === 0) {
+        currentIndex = totalSlides - 1;
+      } else {
+        currentIndex--;
+      }
+      updateSliderPosition();
+    });
+  </script>
 
 </body>
 </html>
