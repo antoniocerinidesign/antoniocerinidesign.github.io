@@ -349,50 +349,6 @@
             border-color: var(--accent-red);
             transform: translateY(-3px);
         }
-        
-        .card-project .card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .card-project .card-meta span:first-child {
-            color: var(--accent-red);
-            font-weight: 600;
-        }
-
-        .card-project h3 { 
-            font-family: var(--font-display);
-            font-size: 1.5rem; 
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .card-project .spec {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-        
-        .card-project .studio { 
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-main);
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-            margin-top: auto;
-        }
 
         /* --- CAROSELLO PROGETTI PERSONALI --- */
         .header-left-group {
@@ -466,6 +422,16 @@
         @media (max-width: 768px) {
             .side-arrow-btn.prev { left: 5px; }
             .side-arrow-btn.next { right: 5px; }
+            
+            .project-title-badge {
+                bottom: 1rem !important;
+                left: 1rem !important;
+                padding: 0.75rem 1.25rem !important;
+            }
+
+            .projects-carousel-track .card-project h3 {
+                font-size: 1.2rem !important;
+            }
         }
 
         .projects-carousel-track {
@@ -488,19 +454,17 @@
             scroll-snap-align: center;
             min-width: 0;
             min-height: 400px;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 2rem;
-            position: relative; /* Necessario per l'immagine di copertina */
-            overflow: hidden;   /* Necessario per mantenere l'immagine all'interno */
+            padding: 0;
+            position: relative; 
+            overflow: hidden;   
         }
 
         .projects-carousel-track .card-project h3 { 
-            font-size: 2.5rem; 
+            font-size: 1.5rem; 
             margin-bottom: 0;
             position: relative; 
             z-index: 2;
+            letter-spacing: -0.01em;
         }
 
         /* --- STILI IMMAGINE COPERTINA PROGETTI --- */
@@ -519,13 +483,16 @@
             transform: scale(1.03);
         }
 
+        /* Posizionamento targhetta in basso a sinistra */
         .project-title-badge {
-            position: relative;
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
             z-index: 2;
             background-color: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--border);
-            padding: 1.5rem 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 1rem 1.75rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
         }
 
         .award-card {
@@ -894,7 +861,6 @@
                     <img src="Carosello1/Tavolo_prova_1.9.jpg" alt="Tavolo Prova 1.9">
                 </div>
 
-                <!-- I pallini vengono generati automaticamente via JS -->
                 <div class="carousel-dots" id="carouselDots"></div>
 
             </div>
@@ -918,7 +884,7 @@
                 
                 <div class="projects-carousel-track" id="projectTrack">
                     
-                    <!-- Riquadro 01 con Immagine Copertina -->
+                    <!-- Riquadro 01 con Immagine Copertina e Titolo in Basso a Sinistra -->
                     <div class="card-project">
                         <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Cover" class="project-cover-img">
                         <div class="project-title-badge">
@@ -1160,7 +1126,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Logica Carosello a Dissolvenza Robustizzata
+            // Logica Carosello a Dissolvenza
             const slides = document.querySelectorAll('.carousel-slide');
             const dotsContainer = document.getElementById('carouselDots');
             let currentIndex = 0;
