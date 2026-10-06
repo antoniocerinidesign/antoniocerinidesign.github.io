@@ -243,8 +243,15 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            cursor: pointer; /* Indica che l'immagine è cliccabile per l'ingrandimento */
+            transition: filter 0.2s ease;
         }
 
+        .carousel-slide img:hover {
+            filter: brightness(0.95);
+        }
+
+        /* Segnaposto stilizzato per immagini mancanti */
         .placeholder-slide {
             display: flex;
             flex-direction: column;
@@ -434,7 +441,6 @@
             display: none; 
         }
 
-        /* MODIFICA: Ogni progetto nel carosello personale occupa ora il 100% per creare un "grande carosello" */
         .projects-carousel-track .card-project {
             flex: 0 0 100%; 
             scroll-snap-align: center;
@@ -661,6 +667,61 @@
             background: var(--accent-red);
         }
 
+        /* --- STILI LIGHTBOX INGRANDIMENTO IMMAGINI --- */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-modal.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: #FFFFFF;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-red);
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -716,7 +777,7 @@
 
     <div class="container">
 
-        <!-- CAROSELLO DISSOLVENZA -->
+        <!-- CAROSELLO DISSOLVENZA (CAROSELLO 1) -->
         <section class="carousel-section">
             <div class="carousel-container">
                 
@@ -1016,6 +1077,12 @@
         </div>
     </div>
 
+    <!-- MODALE LIGHTBOX PER INGRANDIMENTO IMMAGINI -->
+    <div id="imageLightboxModal" class="lightbox-modal">
+        <button class="lightbox-close" id="closeLightboxModal">&times;</button>
+        <img class="lightbox-content" id="lightboxImg" src="" alt="Immagine Ingrandita">
+    </div>
+
     <footer>
         <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED. DESIGNED FOR ARCHITECTURE & PRODUCT DESIGN.</p>
     </footer>
@@ -1079,6 +1146,45 @@
             }
 
             let autoSlide = setInterval(nextSlide, slideInterval);
+
+            // Logica Lightbox Ingrandimento Immagini Carosello 1
+            const lightboxModal = document.getElementById('imageLightboxModal');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeLightboxBtn = document.getElementById('closeLightboxModal');
+
+            // Intercetta il click su qualsiasi immagine del Carosello1
+            const carouselImgs = document.querySelectorAll('.carousel-section .carousel-slide img');
+
+            carouselImgs.forEach(img => {
+                img.addEventListener('click', () => {
+                    if (img.src) {
+                        lightboxImg.src = img.src;
+                        lightboxImg.alt = img.alt || 'Immagine Ingrandita';
+                        lightboxModal.classList.add('active');
+                    }
+                });
+            });
+
+            function closeLightbox() {
+                if (lightboxModal) {
+                    lightboxModal.classList.remove('active');
+                    lightboxImg.src = '';
+                }
+            }
+
+            if (closeLightboxBtn && lightboxModal) {
+                closeLightboxBtn.addEventListener('click', closeLightbox);
+                
+                lightboxModal.addEventListener('click', (e) => {
+                    if (e.target === lightboxModal) closeLightbox();
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                        closeLightbox();
+                    }
+                });
+            }
 
             // Logica Carosello Orizzontale Progetti Personali
             const track = document.getElementById('projectTrack');
