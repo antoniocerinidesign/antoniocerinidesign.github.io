@@ -425,6 +425,49 @@
             color: var(--accent-red);
         }
 
+        .projects-carousel-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .side-arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+            z-index: 15;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .side-arrow-btn:hover {
+            background: var(--accent-red);
+            color: #FFFFFF;
+            border-color: var(--accent-red);
+        }
+
+        .side-arrow-btn.prev {
+            left: -22px;
+        }
+
+        .side-arrow-btn.next {
+            right: -22px;
+        }
+
+        @media (max-width: 768px) {
+            .side-arrow-btn.prev { left: 5px; }
+            .side-arrow-btn.next { right: 5px; }
+        }
+
         .projects-carousel-track {
             display: flex;
             gap: 1.5rem;
@@ -703,7 +746,6 @@
             color: var(--accent-red);
         }
 
-        /* Bottoni di navigazione Lightbox */
         .lightbox-nav-btn {
             position: absolute;
             top: 50%;
@@ -731,7 +773,6 @@
             right: 2rem;
         }
 
-        /* Media queries sistemate e chiuse correttamente */
         @media (max-width: 768px) {
             .lightbox-prev { left: 0.5rem; padding: 0.8rem; }
             .lightbox-next { right: 0.5rem; padding: 0.8rem; }
@@ -836,50 +877,56 @@
                 <div class="header-left-group">
                     <h2>PERSONAL PROJECTS</h2>
                     <div class="project-arrows">
-                        <button id="prevProject" class="arrow-btn" type="button">&#8592;</button>
-                        <button id="nextProject" class="arrow-btn" type="button">&#8594;</button>
+                        <button id="prevProject" class="arrow-btn" type="button" aria-label="Precedente">&#8592;</button>
+                        <button id="nextProject" class="arrow-btn" type="button" aria-label="Successivo">&#8594;</button>
                     </div>
                 </div>
                 <span class="section-num">/ 01</span>
             </div>
             
-            <div class="projects-carousel-track" id="projectTrack">
+            <div class="projects-carousel-container">
+                <button id="prevProjectSide" class="side-arrow-btn prev" type="button" aria-label="Precedente">&#10094;</button>
                 
-                <!-- Riquadro 01 -->
-                <div class="card-project">
-                    <div>
-                        <h3>01 - AUTO CONCEPT</h3>
+                <div class="projects-carousel-track" id="projectTrack">
+                    
+                    <!-- Riquadro 01 -->
+                    <div class="card-project">
+                        <div>
+                            <h3>01 - AUTO CONCEPT</h3>
+                        </div>
                     </div>
+
+                    <!-- Riquadro 02 -->
+                    <div class="card-project">
+                        <div>
+                            <h3>02 - NOME PROGETTO</h3>
+                        </div>
+                    </div>
+
+                    <!-- Riquadro 03 -->
+                    <div class="card-project">
+                        <div>
+                            <h3>03 - NOME PROGETTO</h3>
+                        </div>
+                    </div>
+
+                    <!-- Riquadro 04 -->
+                    <div class="card-project">
+                        <div>
+                            <h3>04 - NOME PROGETTO</h3>
+                        </div>
+                    </div>
+
+                    <!-- Riquadro 05 -->
+                    <div class="card-project">
+                        <div>
+                            <h3>05 - NOME PROGETTO</h3>
+                        </div>
+                    </div>
+                    
                 </div>
 
-                <!-- Riquadro 02 -->
-                <div class="card-project">
-                    <div>
-                        <h3>02 - NOME PROGETTO</h3>
-                    </div>
-                </div>
-
-                <!-- Riquadro 03 -->
-                <div class="card-project">
-                    <div>
-                        <h3>03 - NOME PROGETTO</h3>
-                    </div>
-                </div>
-
-                <!-- Riquadro 04 -->
-                <div class="card-project">
-                    <div>
-                        <h3>04 - NOME PROGETTO</h3>
-                    </div>
-                </div>
-
-                <!-- Riquadro 05 -->
-                <div class="card-project">
-                    <div>
-                        <h3>05 - NOME PROGETTO</h3>
-                    </div>
-                </div>
-                
+                <button id="nextProjectSide" class="side-arrow-btn next" type="button" aria-label="Successivo">&#10095;</button>
             </div>
         </section>
 
@@ -1148,7 +1195,6 @@
             const prevLightboxBtn = document.getElementById('prevLightboxBtn');
             const nextLightboxBtn = document.getElementById('nextLightboxBtn');
 
-            // Intercetta il click su qualsiasi immagine del Carosello1
             const carouselImgs = Array.from(document.querySelectorAll('.carousel-section .carousel-slide img'));
             let currentLightboxIndex = -1;
 
@@ -1173,7 +1219,6 @@
 
             function closeLightbox() {
                 lightboxModal.classList.remove('active');
-                // Svuota src dopo la transizione per evitare sfarfallii
                 setTimeout(() => {
                     if (!lightboxModal.classList.contains('active')) {
                         lightboxImg.setAttribute('src', '');
@@ -1207,7 +1252,6 @@
                 navigateLightbox(1);
             });
 
-            // Navigazione Lightbox con tastiera
             document.addEventListener('keydown', (e) => {
                 if (lightboxModal.classList.contains('active')) {
                     if (e.key === 'Escape') closeLightbox();
@@ -1216,20 +1260,27 @@
                 }
             });
 
-            // Logica Scorrimento Progetti Personali
+            // Logica Scorrimento Progetti Personali (Controlli Testata + Controlli Laterali)
             const track = document.getElementById('projectTrack');
             const prevBtn = document.getElementById('prevProject');
             const nextBtn = document.getElementById('nextProject');
+            const prevSideBtn = document.getElementById('prevProjectSide');
+            const nextSideBtn = document.getElementById('nextProjectSide');
 
-            const scrollAmount = track.clientWidth > 768 ? track.clientWidth / 2 : track.clientWidth;
+            const getScrollAmount = () => track.clientWidth;
 
-            nextBtn.addEventListener('click', () => {
-                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            });
+            const scrollNext = () => {
+                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            };
 
-            prevBtn.addEventListener('click', () => {
-                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            });
+            const scrollPrev = () => {
+                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            };
+
+            if (nextBtn) nextBtn.addEventListener('click', scrollNext);
+            if (prevBtn) prevBtn.addEventListener('click', scrollPrev);
+            if (nextSideBtn) nextSideBtn.addEventListener('click', scrollNext);
+            if (prevSideBtn) prevSideBtn.addEventListener('click', scrollPrev);
 
             // Logica Modale Contatti
             const modal = document.getElementById('contactModal');
@@ -1237,7 +1288,6 @@
             const closeBtn = document.getElementById('closeContactModal');
             const nextUrlInput = document.getElementById('nextUrl');
 
-            // Imposta l'URL di redirect sulla pagina corrente
             nextUrlInput.value = window.location.href;
 
             openBtn.addEventListener('click', (e) => {
