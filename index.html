@@ -25,11 +25,7 @@
             --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font-body);
@@ -39,43 +35,152 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* Barra Superiore */
         .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+            font-family: var(--font-display); font-size: 0.75rem;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+        }
+
+        .top-bar-status { display: flex; align-items: center; gap: 0.5rem; }
+        .dot { width: 6px; height: 6px; background-color: var(--accent-green); border-radius: 50%; }
+
+        header { padding: 4rem 2rem; border-bottom: 1px solid var(--border); max-width: 1200px; margin: 0 auto; }
+        .top-logo-container { display: flex; justify-content: center; margin-bottom: 3rem; }
+        
+        .header-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+        @media (max-width: 768px) { .header-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+        .meta-label {
+            font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--accent-red); font-weight: 600; margin-bottom: 1rem; display: block;
+        }
+
+        h1 { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .subtitle { font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-style: italic; font-weight: 400; color: var(--text-main); line-height: 1.2; margin-bottom: 1.5rem; }
+
+        .experience-list { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.03em; color: var(--text-muted); line-height: 1.8; border-left: 2px solid var(--border); padding-left: 1.25rem; }
+        .about-quote { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.4; font-style: italic; color: var(--text-main); background: var(--card-bg); border: 1px solid var(--border); border-left: 4px solid var(--accent-red); padding: 2rem; border-radius: 2px; }
+
+        .contacts-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+        .contact-btn {
+            font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--text-main); text-decoration: none; background: var(--card-bg); padding: 0.75rem 1.25rem;
+            border: 1px solid var(--border); transition: all 0.2s ease; cursor: pointer;
+        }
+        .contact-btn:hover { background: var(--accent-red); color: #FFFFFF; border-color: var(--accent-red); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        section { margin-bottom: 5rem; }
+
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 2.5rem; }
+        h2 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .section-num { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--accent-red); }
+
+        .grid-projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card-project { background-color: var(--card-bg); border: 1px solid var(--border); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: transform 0.2s ease, border-color 0.2s ease; }
+        .card-project:hover { border-color: var(--accent-red); transform: translateY(-3px); }
+        
+        .card-project .card-meta { display: flex; justify-content: space-between; font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .card-project .card-meta span:first-child { color: var(--accent-red); font-weight: 600; }
+        .card-project h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .card-project .spec { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem; }
+        
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .skills-group { background: var(--card-bg); border: 1px solid var(--border); padding: 1.75rem; }
+        .skills-group h4 { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+        
+        .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        
+        /* Chiusura corretta della classe .tag che avevi lasciato a metà */
+        .tag {
             font-family: var(--font-display);
             font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            background: var(--bg);
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
             color: var(--text-muted);
         }
+    </style>
+</head>
+<body>
 
-        .top-bar-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span>Portfolio 2026</span>
+        <div class="top-bar-status">
+            <div class="dot"></div>
+            <span>Disponibile per nuovi progetti</span>
+        </div>
+    </div>
 
-        .dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-        }
+    <!-- Header Section -->
+    <header>
+        <div class="header-grid">
+            <div>
+                <span class="meta-label">Creative Developer & Designer</span>
+                <h1>Antonio Cerini</h1>
+                <p class="subtitle">Trasformo idee complesse in interfacce semplici, eleganti e funzionali.</p>
+                <div class="contacts-bar">
+                    <a href="mailto:info@example.com" class="contact-btn">Email</a>
+                    <a href="#" class="contact-btn">LinkedIn</a>
+                </div>
+            </div>
+            <div>
+                <div class="about-quote">
+                    "Il design non è solo come appare e come si sente. Il design è come funziona."
+                </div>
+            </div>
+        </div>
+    </header>
 
-        /* Hero / Header Section */
-        header {
-            padding: 4rem 2rem;
-            border-bottom: 1px solid var(--border);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Projects Section -->
+        <section>
+            <div class="section-header">
+                <h2>Progetti Selezionati</h2>
+                <span class="section-num">01</span>
+            </div>
+            
+            <div class="grid-projects">
+                <!-- Progetto 1 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>Web Design</span>
+                            <span>2025</span>
+                        </div>
+                        <h3>E-commerce Rebrand</h3>
+                        <p class="spec">Restyling completo per un brand di moda.</p>
+                    </div>
+                </div>
+                
+                <!-- Progetto 2 -->
+                <div class="card-project">
+                    <div>
+                        <div class="card-meta">
+                            <span>UI/UX</span>
+                            <span>2024</span>
+                        </div>
+                        <h3>Fintech App</h3>
+                        <p class="spec">Dashboard intuitiva per la gestione finanziaria.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        .top-logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 3rem;
-        }
+        <!-- Skills Section -->
+        <section>
+            <div class="section-header">
+                <h2>Competenze</h2>
+                <span class="section-num">02</span>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skills-group">
+                    <h4>Sviluppo Frontend</h4>
+                    <div class="tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3
