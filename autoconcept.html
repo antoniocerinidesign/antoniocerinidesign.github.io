@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>01 — AUTO CONCEPT | Antonio Cerini</title>
-    <!-- Google Fonts import -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
-        /* --- RESET E VARIABILI --- */
         :root {
-            --bg-color: #0A0A0A;
-            --surface-color: #121212;
-            --border-dark: #262626;
-            --border-subtle: #1f1f1f;
-            --text-primary: #EDEDED;
-            --text-muted: #888888;
-            --font-display: 'Cinzel', serif;
-            --font-body: 'Inter', sans-serif;
-            --max-width: 1200px;
+            --text-light: #F4F2ED;
+            --text-muted: #A0A0A0;
+            --accent-red: #D9381E;
+            --border-dark: rgba(255, 255, 255, 0.12);
+            
+            --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-serif: 'Libre Baskerville', Georgia, serif;
+            --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         * {
@@ -30,196 +28,233 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
             font-family: var(--font-body);
+            background: linear-gradient(180deg, #080808 0%, #1c1c1e 45%, #2c2d30 100%);
+            background-attachment: fixed;
+            color: var(--text-light);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            padding-bottom: 5rem;
-        }
-
-        /* --- HEADER & NAVIGAZIONE --- */
-        .header {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 2.5rem 1.5rem 1.5rem;
+            min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .back-link {
+        /* Barra Superiore / Navigazione */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 5%;
+            border-bottom: 1px solid var(--border-dark);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            color: var(--text-light);
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
             transition: color 0.2s ease, transform 0.2s ease;
+            font-weight: 600;
         }
 
-        .back-link:hover {
-            color: #FFFFFF;
+        .back-btn:hover {
+            color: var(--accent-red);
             transform: translateX(-3px);
         }
 
-        /* --- LAYOUT PRINCIPALE --- */
-        main {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        .project-category {
+            color: var(--accent-red);
+            font-weight: 600;
         }
 
-        /* --- HERO IMAGE CONTAINER --- */
-        .hero-image-wrapper {
+        /* Intestazione della Pagina */
+        header {
+            padding: 3rem 5% 0.5rem 5%;
+            max-width: 100%;
+            margin: 0 auto;
             width: 100%;
-            background-color: var(--surface-color);
+        }
+
+        .meta-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            color: #FFFFFF;
+        }
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 2vw, 1.75rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        /* Sezione Principale */
+        main {
+            width: 100%;
+            padding: 0 5% 5rem 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-image-wrapper {
+            width: 90vw;
+            max-width: 1600px;
             border: 1px solid var(--border-dark);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 2rem;
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0.5rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+            margin-bottom: 3.5rem;
         }
 
         .hero-image-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
-            cursor: zoom-in;
-            transition: opacity 0.3s ease;
+            object-fit: contain;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
         }
 
         .hero-image-wrapper img:hover {
-            opacity: 0.92;
+            opacity: 0.95;
         }
 
-        /* --- GRID INFO PROGETTO E SKETCH --- */
+        /* Layout Affiancato: Testi a Sinistra, Sketch a Destra */
         .project-content-grid {
+            width: 90vw;
+            max-width: 1600px;
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 3.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
         }
 
-        @media (min-width: 850px) {
-            .project-content-grid {
-                grid-template-columns: 1.1fr 0.9fr;
-                gap: 3.5rem;
-            }
-        }
-
-        /* Testi Progetto */
         .text-container {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 2.5rem;
         }
 
-        .project-title {
+        .desc-block h3 {
             font-family: var(--font-display);
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            line-height: 1.2;
-            color: #FFFFFF;
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
-        .project-description {
-            font-size: 0.95rem;
-            color: #CCCCCC;
+        .desc-block p {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-light);
             font-weight: 300;
-            line-height: 1.8;
-            text-align: justify;
         }
 
-        /* Container Immagine Sketch */
         .sketch-wrapper {
-            background-color: var(--surface-color);
             border: 1px solid var(--border-dark);
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .sketch-wrapper img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
-            cursor: zoom-in;
-            transition: opacity 0.3s ease;
+            object-fit: contain;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
         }
 
         .sketch-wrapper img:hover {
-            opacity: 0.92;
+            opacity: 0.95;
         }
 
-        /* --- SEZIONI GENERALI --- */
+        /* Sezione Concept Art con altezza uniforme e visibilità completa */
         .section-title {
+            width: 90vw;
+            max-width: 1600px;
             font-family: var(--font-display);
             font-size: 1.5rem;
-            font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: #FFFFFF;
-            margin-bottom: 1.25rem;
+            margin: 6rem 0 2.5rem 0;
             border-bottom: 1px solid var(--border-dark);
             padding-bottom: 1rem;
+            text-align: left;
         }
 
-        /* --- CONCEPT ART GRID --- */
         .concept-art-grid {
+            width: 90vw;
+            max-width: 1600px;
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-
-        @media (min-width: 600px) {
-            .concept-art-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         .concept-art-item {
-            background-color: var(--surface-color);
             border: 1px solid var(--border-dark);
-            border-radius: 4px;
+            background-color: rgba(15, 15, 18, 0.7);
+            padding: 0.75rem;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             overflow: hidden;
-            aspect-ratio: 16 / 9;
+        }
+
+        .concept-art-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent-red);
         }
 
         .concept-art-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
-            cursor: zoom-in;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: pointer;
         }
 
-        .concept-art-item img:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
-        }
-
-        /* --- RENDERS CAROUSEL SECTION --- */
+        /* Stile Carosello RENDERS */
         .renders-carousel-section {
-            margin-bottom: 4rem;
+            width: 90vw;
+            max-width: 1600px;
+            margin: 5rem 0 2rem 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .carousel-header {
@@ -240,53 +275,84 @@
             color: #FFFFFF;
         }
 
-        /* Slide Unica */
+        .nav-buttons-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-btn-sq {
+            width: 42px;
+            height: 42px;
+            background-color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #111111;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-btn-sq:hover {
+            background-color: var(--accent-red);
+            color: #FFFFFF;
+        }
+
         .single-slide-wrapper {
             position: relative;
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-dark);
-            border-radius: 4px;
-            overflow: hidden;
-            aspect-ratio: 16 / 9;
             width: 100%;
+            height: 650px;
+            background-color: rgba(15, 15, 18, 0.8);
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
 
         .single-slide-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             display: block;
-            cursor: zoom-in;
-            transition: opacity 0.3s ease;
-        }
-
-        .single-slide-wrapper img:hover {
-            opacity: 0.95;
-        }
-
-        /* Indicatori (Puntini) */
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-top: 1.25rem;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--border-dark);
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
+            transition: opacity 0.25s ease;
         }
 
-        .dot.active {
-            background-color: #FFFFFF;
-            transform: scale(1.2);
+        .carousel-dots-overlay {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
         }
 
-        /* --- LIGHTBOX (ZOOM MODALE) --- */
+        .carousel-dots-overlay .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .carousel-dots-overlay .dot.active {
+            background-color: var(--accent-red);
+            border-color: var(--accent-red);
+            transform: scale(1.15);
+        }
+
+        /* Modal Lightbox (Ingrandimento Immagine) */
         .lightbox {
             display: none;
             position: fixed;
@@ -304,78 +370,217 @@
         }
 
         .lightbox-content {
-            max-width: 85vw;
-            max-height: 85vh;
+            max-width: 92vw;
+            max-height: 90vh;
             object-fit: contain;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: default;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .lightbox-close {
             position: absolute;
-            top: 2rem;
-            right: 2.5rem;
-            color: #FFFFFF;
+            top: 25px;
+            right: 35px;
+            color: var(--text-light);
             font-size: 2.5rem;
+            font-family: var(--font-display);
             font-weight: 300;
             cursor: pointer;
-            user-select: none;
-            transition: color 0.2s ease, transform 0.2s ease;
-            z-index: 10002;
+            transition: color 0.2s ease;
             line-height: 1;
         }
 
         .lightbox-close:hover {
-            color: #888888;
-            transform: scale(1.1);
+            color: var(--accent-red);
         }
 
-        /* FRECCE NAVIGAZIONE LIGHTBOX (A DESTRA E SINISTRA) */
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #FFFFFF;
-            color: #111111;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
-            user-select: none;
-            z-index: 10002;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .lightbox-nav:hover {
-            background-color: #E0E0E0;
-            transform: translateY(-50%) scale(1.08);
-        }
-
-        .lightbox-prev {
-            left: 2rem;
-        }
-
-        .lightbox-next {
-            right: 2rem;
+        /* Responsive */
+        @media (max-width: 992px) {
+            .project-content-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .concept-art-grid {
+                grid-template-columns: 1fr;
+            }
+            .concept-art-item {
+                height: 380px;
+            }
+            .single-slide-wrapper {
+                height: 450px;
+            }
         }
 
         @media (max-width: 600px) {
-            .lightbox-nav {
-                width: 42px;
-                height: 42px;
-                font-size: 1.1rem;
+            .single-slide-wrapper {
+                height: 320px;
             }
-            .lightbox-prev { left: 0.8rem; }
-            .lightbox-next { right: 0.8rem; }
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-dark);
+            padding: 2.5rem 5%;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Torna alla home
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">← Torna alla Home</a>
+        <span class="project-category">PERSONAL PROJECT / 01</span>
+    </div>
+
+    <header>
+        <span class="meta-label">CONCEPT DESIGN & VISUALIZATION</span>
+        <h1>01 — AUTO CONCEPT</h1>
+        <p class="subtitle">Automotive Concept Design</p>
+    </header>
+
+    <main>
+        <div class="hero-image-wrapper">
+            <img src="./01%20-%20AUTO%20CONCEPT.png" alt="01 Auto Concept Full View" onclick="openLightbox(this.src)">
+        </div>
+
+        <div class="project-content-grid">
+            <div class="text-container">
+                <div class="desc-block">
+                    <h3>EN</h3>
+                    <p>In my quest to refine my skills in the transportation design, I took on the challenge of creating a concept car using Blender 3d program. My aim was to strike a balance between sportiness and elegance, focusing on simplicity to achieve a captivating design. I carefully modeled each line and shape, ensuring they were both intriguing and sleek. The result is a concept car that embodies the essence of both athleticism and sophistication, representing a significant milestone in my journey as a product and transportation designer.</p>
+                </div>
+
+                <div class="desc-block">
+                    <h3>IT</h3>
+                    <p>Nel mio percorso per affinare le competenze nel transportation design, ho accettato la sfida di creare una concept car utilizzando il programma 3D Blender. Il mio obiettivo era trovare un equilibrio tra sportività ed eleganza, concentrandomi sulla semplicità per ottenere un design accattivante. Ho modellato con cura ogni linea e forma, assicurandomi che fossero al contempo intriganti e filanti. Il risultato è una concept car che incarna l'essenza sia dell'atletismo che della raffinatezza, rappresentando un traguardo significativo nel mio percorso come product e transportation designer.</p>
+                </div>
+            </div>
+
+            <div class="sketch-wrapper">
+                <img src="./01%20-%20AUTO%20CONCEPT_Sketch_01.png" alt="01 Auto Concept Sketch" onclick="openLightbox(this.src)">
+            </div>
+        </div>
+
+        <h2 class="section-title">CONCEPT ART</h2>
+        <div class="concept-art-grid">
+            
+            <div class="concept-art-item">
+                <img src="./Carosello3/Risorsa%207.png" alt="Concept Art - Risorsa 7" onclick="openLightbox(this.src)">
+            </div>
+
+            <div class="concept-art-item">
+                <img src="./Carosello3/Risorsa%209.png" alt="Concept Art - Risorsa 9" onclick="openLightbox(this.src)">
+            </div>
+
+            <div class="concept-art-item">
+                <img src="./Carosello3/Risorsa%2010.png" alt="Concept Art - Risorsa 10" onclick="openLightbox(this.src)">
+            </div>
+
+        </div>
+
+        <div class="renders-carousel-section">
+            
+            <div class="carousel-header">
+                <h2 class="carousel-title">RENDERS</h2>
+                <div class="nav-buttons-wrapper">
+                    <button class="nav-btn-sq" onclick="changeRenderSlide(-1)" aria-label="Precedente">&#x276E;</button>
+                    <button class="nav-btn-sq" onclick="changeRenderSlide(1)" aria-label="Successivo">&#x276F;</button>
+                </div>
+            </div>
+
+            <div class="single-slide-wrapper">
+                <img id="render-slide-img" src="./Carosello3/Risorsa%207.png" alt="Render 1" onclick="openLightbox(this.src)">
+                
+                <div class="carousel-dots-overlay" id="render-dots-container">
+                    <span class="dot active" onclick="goToRenderSlide(0)"></span>
+                    <span class="dot" onclick="goToRenderSlide(1)"></span>
+                    <span class="dot" onclick="goToRenderSlide(2)"></span>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Zoomed View" onclick="event.stopPropagation()">
+    </div>
+
+    <footer>
+        <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const renderImages = [
+            "./Carosello3/Risorsa%207.png",
+            "./Carosello3/Risorsa%209.png",
+            "./Carosello3/Risorsa%2010.png"
+        ];
+
+        let currentRenderIndex = 0;
+
+        function updateRenderSlide() {
+            const imgElement = document.getElementById('render-slide-img');
+            const dots = document.querySelectorAll('#render-dots-container .dot');
+
+            imgElement.style.opacity = '0.3';
+            setTimeout(() => {
+                imgElement.src = renderImages[currentRenderIndex];
+                imgElement.style.opacity = '1';
+            }, 120);
+
+            dots.forEach((dot, index) => {
+                if (index === currentRenderIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function changeRenderSlide(direction) {
+            currentRenderIndex = (currentRenderIndex + direction + renderImages.length) % renderImages.length;
+            updateRenderSlide();
+        }
+
+        function goToRenderSlide(index) {
+            currentRenderIndex = index;
+            updateRenderSlide();
+        }
+
+        // Funzioni Lightbox
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Chiusura premendo il tasto ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>
