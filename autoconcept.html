@@ -112,7 +112,7 @@
             color: var(--text-muted);
         }
 
-        /* Sezione Principale: Immagine e Testo */
+        /* Sezione Principale */
         main {
             width: 100%;
             padding: 0 5% 5rem 5%;
@@ -138,16 +138,17 @@
             object-fit: contain;
         }
 
-        /* Sezione Descrizione sotto a sinistra */
-        .project-description {
+        /* Layout Affiancato: Testi a Sinistra, Sketch a Destra */
+        .project-content-grid {
             width: 90vw;
             max-width: 1600px;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
         }
 
         .text-container {
-            max-width: 750px;
             display: flex;
             flex-direction: column;
             gap: 2.5rem;
@@ -167,10 +168,32 @@
 
         .desc-block p {
             font-family: var(--font-body);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.7;
             color: var(--text-light);
             font-weight: 300;
+        }
+
+        .sketch-wrapper {
+            border: 1px solid var(--border-dark);
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .sketch-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Adattamento Responsive */
+        @media (max-width: 992px) {
+            .project-content-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
         }
 
         /* Footer */
@@ -201,11 +224,13 @@
     </header>
 
     <main>
+        <!-- Render Principale -->
         <div class="hero-image-wrapper">
             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Full View">
         </div>
 
-        <div class="project-description">
+        <!-- Contenuto Affiancato -->
+        <div class="project-content-grid">
             <div class="text-container">
                 <!-- Testo in Inglese -->
                 <div class="desc-block">
@@ -218,6 +243,11 @@
                     <h3>IT</h3>
                     <p>Nel mio percorso per affinare le competenze nel transportation design, ho accettato la sfida di creare una concept car utilizzando il programma 3D Blender. Il mio obiettivo era trovare un equilibrio tra sportività ed eleganza, concentrandomi sulla semplicità per ottenere un design accattivante. Ho modellato con cura ogni linea e forma, assicurandomi che fossero al contempo intriganti e filanti. Il risultato è una concept car che incarna l'essenza sia dell'atletismo che della raffinatezza, rappresentando un traguardo significativo nel mio percorso come product e transportation designer.</p>
                 </div>
+            </div>
+
+            <!-- Immagine Sketch a Destra -->
+            <div class="sketch-wrapper">
+                <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT_Sketch_01.png?raw=true" alt="01 Auto Concept Sketch">
             </div>
         </div>
     </main>
