@@ -46,7 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 2.5%;
+            padding: 1.25rem 5%;
             border-bottom: 1px solid var(--border-dark);
             font-family: var(--font-display);
             font-size: 0.75rem;
@@ -76,8 +76,8 @@
 
         /* Intestazione della Pagina */
         header {
-            padding: 3rem 2.5% 1.5rem 2.5%;
-            max-width: 98vw;
+            padding: 3rem 5% 0.5rem 5%;
+            max-width: 100%;
             margin: 0 auto;
             width: 100%;
         }
@@ -112,21 +112,23 @@
             color: var(--text-muted);
         }
 
-        /* Contenitore Immagine Principale */
+        /* Sezione Principale: Immagine e Testo */
         main {
             width: 100%;
-            padding: 1rem 1.5% 4rem 1.5%;
+            padding: 0 5% 5rem 5%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         .hero-image-wrapper {
-            width: 97vw;
-            max-width: 1920px;
+            width: 90vw;
+            max-width: 1600px;
             border: 1px solid var(--border-dark);
             background-color: rgba(0, 0, 0, 0.35);
             padding: 0.5rem;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+            margin-bottom: 3.5rem;
         }
 
         .hero-image-wrapper img {
@@ -136,10 +138,45 @@
             object-fit: contain;
         }
 
+        /* Sezione Descrizione sotto a sinistra */
+        .project-description {
+            width: 90vw;
+            max-width: 1600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-container {
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .desc-block h3 {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .desc-block p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--border-dark);
-            padding: 2.5rem 2.5%;
+            padding: 2.5rem 5%;
             text-align: center;
             font-family: var(--font-display);
             font-size: 0.75rem;
@@ -152,26 +189,4 @@
 </head>
 <body>
 
-    <div class="top-bar">
-        <a href="index.html" class="back-btn">← Torna alla Home</a>
-        <span class="project-category">PERSONAL PROJECT / 01</span>
-    </div>
-
-    <header>
-        <span class="meta-label">CONCEPT DESIGN & VISUALIZATION</span>
-        <h1>01 — AUTO CONCEPT</h1>
-        <p class="subtitle">Automotive Concept Design</p>
-    </header>
-
-    <main>
-        <div class="hero-image-wrapper">
-            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Full View">
-        </div>
-    </main>
-
-    <footer>
-        <p>© 2026 ANTONIO CERINI — ALL RIGHTS RESERVED.</p>
-    </footer>
-
-</body>
-</html>
+    <div class="top
