@@ -200,7 +200,7 @@
             opacity: 0.95;
         }
 
-        /* Sezione Concept Art con altezza uniforme */
+        /* Sezione Concept Art con altezza uniforme e visibilità completa */
         .section-title {
             width: 90vw;
             max-width: 1600px;
@@ -225,9 +225,12 @@
 
         .concept-art-item {
             border: 1px solid var(--border-dark);
-            background-color: rgba(0, 0, 0, 0.35);
-            padding: 0.5rem;
-            height: 320px; /* Altezza uniforme fissa */
+            background-color: rgba(15, 15, 18, 0.7);
+            padding: 0.75rem;
+            height: 450px; /* Altezza uniforme calibrata */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             overflow: hidden;
         }
@@ -241,7 +244,7 @@
         .concept-art-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Copre perfettamente l'area senza spazi vuoti */
+            object-fit: contain; /* Preserva l'intera immagine senza tagli */
             display: block;
             cursor: pointer;
         }
@@ -305,7 +308,7 @@
                 grid-template-columns: 1fr;
             }
             .concept-art-item {
-                height: 280px;
+                height: 380px;
             }
         }
 
