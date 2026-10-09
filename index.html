@@ -357,30 +357,6 @@
             gap: 1.5rem;
         }
 
-        .project-arrows {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .arrow-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1.2rem;
-        }
-
-        .arrow-btn:hover {
-            border-color: var(--accent-red);
-            color: var(--accent-red);
-        }
-
         .projects-carousel-container {
             position: relative;
             width: 100%;
@@ -457,6 +433,11 @@
             padding: 0;
             position: relative; 
             overflow: hidden;   
+        }
+
+        /* Padding per i riquadri senza targhetta o copertina */
+        .projects-carousel-track .card-project > div:not(.project-title-badge) {
+            padding: 2rem;
         }
 
         .projects-carousel-track .card-project h3 { 
@@ -891,10 +872,13 @@
                         </div>
                     </div>
 
-                    <!-- Riquadro 02 -->
+                    <!-- Riquadro 02 con Immagine Copertina e Titolo in Basso a Sinistra -->
                     <div class="card-project">
-                        <div>
-                            <h3>02 - NOME PROGETTO</h3>
+                        <a href="haptic.html">
+                            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/02%20-%20HAPTIC.png?raw=true" alt="02 Haptic Cover" class="project-cover-img">
+                        </a>
+                        <div class="project-title-badge">
+                            <h3>02 - HAPTIC</h3>
                         </div>
                     </div>
 
@@ -1255,8 +1239,6 @@
 
             // Logica Scorrimento Progetti Personali
             const track = document.getElementById('projectTrack');
-            const prevBtn = document.getElementById('prevProject');
-            const nextBtn = document.getElementById('nextProject');
             const prevSideBtn = document.getElementById('prevProjectSide');
             const nextSideBtn = document.getElementById('nextProjectSide');
 
@@ -1270,8 +1252,6 @@
                 track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
             };
 
-            if (nextBtn) nextBtn.addEventListener('click', scrollNext);
-            if (prevBtn) prevBtn.addEventListener('click', scrollPrev);
             if (nextSideBtn) nextSideBtn.addEventListener('click', scrollNext);
             if (prevSideBtn) prevSideBtn.addEventListener('click', scrollPrev);
 
