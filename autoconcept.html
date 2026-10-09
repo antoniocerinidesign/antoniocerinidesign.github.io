@@ -199,7 +199,7 @@
             opacity: 0.95;
         }
 
-        /* Sezione Concept Art con altezza uniforme e visibilità completa */
+        /* Sezione Concept Art */
         .section-title {
             width: 90vw;
             max-width: 1600px;
@@ -298,6 +298,34 @@
             transition: opacity 0.25s ease;
         }
 
+        /* Frecce Carosello */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            z-index: 20;
+            padding: 15px;
+            transition: color 0.2s ease, transform 0.2s ease;
+            user-select: none;
+        }
+
+        .carousel-arrow:hover {
+            color: var(--accent-red);
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .carousel-arrow.prev {
+            left: 15px;
+        }
+
+        .carousel-arrow.next {
+            right: 15px;
+        }
+
+        /* Pallini Carosello */
         .carousel-dots-overlay {
             position: absolute;
             bottom: 20px;
@@ -328,7 +356,7 @@
             transform: scale(1.15);
         }
 
-        /* Modal Lightbox (Ingrandimento Immagine) */
+        /* Modal Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -391,6 +419,10 @@
             }
             .single-slide-wrapper {
                 height: 450px;
+            }
+            .carousel-arrow {
+                font-size: 2rem;
+                padding: 10px;
             }
         }
 
@@ -474,7 +506,14 @@
             </div>
 
             <div class="single-slide-wrapper">
+                
+                <!-- Freccia Sinistra -->
+                <span class="carousel-arrow prev" onclick="changeRenderSlide(-1, true)">&#10094;</span>
+
                 <img id="render-slide-img" src="./Carosello2/Risorsa%201.png" alt="Render 1" onclick="openLightbox(this.src)">
+                
+                <!-- Freccia Destra -->
+                <span class="carousel-arrow next" onclick="changeRenderSlide(1, true)">&#10095;</span>
                 
                 <div class="carousel-dots-overlay" id="render-dots-container">
                     <span class="dot active" onclick="goToRenderSlide(0)"></span>
@@ -530,9 +569,13 @@
             });
         }
 
-        function changeRenderSlide(direction) {
+        // isManual=true indica se la freccia è stata cliccata dall'utente
+        function changeRenderSlide(direction, isManual = false) {
             currentRenderIndex = (currentRenderIndex + direction + renderImages.length) % renderImages.length;
             updateRenderSlide();
+            if (isManual) {
+                resetAutoPlay();
+            }
         }
 
         function goToRenderSlide(index) {
