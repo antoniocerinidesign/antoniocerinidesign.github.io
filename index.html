@@ -350,19 +350,35 @@
             transform: translateY(-3px);
         }
 
-        .card-project a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
         /* --- CAROSELLO PROGETTI PERSONALI --- */
         .header-left-group {
             display: flex;
             align-items: center;
             gap: 1.5rem;
+        }
+
+        .project-arrows {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .arrow-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+
+        .arrow-btn:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
         }
 
         .projects-carousel-container {
@@ -441,11 +457,6 @@
             padding: 0;
             position: relative; 
             overflow: hidden;   
-        }
-
-        /* Padding per i riquadri senza targhetta o copertina */
-        .projects-carousel-track .card-project > div:not(.project-title-badge) {
-            padding: 2rem;
         }
 
         .projects-carousel-track .card-project h3 { 
@@ -874,30 +885,30 @@
                     <div class="card-project">
                         <a href="autoconcept.html">
                             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Cover" class="project-cover-img">
-                            <div class="project-title-badge">
-                                <h3>01 - AUTO CONCEPT</h3>
-                            </div>
                         </a>
+                        <div class="project-title-badge">
+                            <h3>01 - AUTO CONCEPT</h3>
+                        </div>
                     </div>
 
                     <!-- Riquadro 02 -->
                     <div class="card-project">
                         <a href="haptic.html">
                             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/02%20-%20HAPTIC.png?raw=true" alt="02 Haptic Cover" class="project-cover-img">
-                            <div class="project-title-badge">
-                                <h3>02 - HAPTIC</h3>
-                            </div>
                         </a>
+                        <div class="project-title-badge">
+                            <h3>02 - HAPTIC</h3>
+                        </div>
                     </div>
 
                     <!-- Riquadro 03 -->
                     <div class="card-project">
                         <a href="gentalyn.html">
                             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/03%20-%20GENTALYN%20BETA.png?raw=true" alt="03 Gentalyn Cover" class="project-cover-img">
-                            <div class="project-title-badge">
-                                <h3>03 - GENTALYN</h3>
-                            </div>
                         </a>
+                        <div class="project-title-badge">
+                            <h3>03 - GENTALYN</h3>
+                        </div>
                     </div>
 
                     <!-- Riquadro 04 -->
@@ -1243,3 +1254,59 @@
             document.addEventListener('keydown', (e) => {
                 if (lightboxModal.classList.contains('active')) {
                     if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                    if (e.key === 'ArrowRight') navigateLightbox(1);
+                }
+            });
+
+            // Logica Scorrimento Progetti Personali
+            const track = document.getElementById('projectTrack');
+            const prevBtn = document.getElementById('prevProject');
+            const nextBtn = document.getElementById('nextProject');
+            const prevSideBtn = document.getElementById('prevProjectSide');
+            const nextSideBtn = document.getElementById('nextProjectSide');
+
+            const getScrollAmount = () => track.clientWidth;
+
+            const scrollNext = () => {
+                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            };
+
+            const scrollPrev = () => {
+                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            };
+
+            if (nextBtn) nextBtn.addEventListener('click', scrollNext);
+            if (prevBtn) prevBtn.addEventListener('click', scrollPrev);
+            if (nextSideBtn) nextSideBtn.addEventListener('click', scrollNext);
+            if (prevSideBtn) prevSideBtn.addEventListener('click', scrollPrev);
+
+            // Logica Modale Contatti
+            const modal = document.getElementById('contactModal');
+            const openBtn = document.getElementById('openContactModal');
+            const closeBtn = document.getElementById('closeContactModal');
+            const nextUrlInput = document.getElementById('nextUrl');
+
+            nextUrlInput.value = window.location.href;
+
+            openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
