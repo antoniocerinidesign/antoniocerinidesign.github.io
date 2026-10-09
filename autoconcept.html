@@ -508,6 +508,8 @@
         ];
 
         let currentRenderIndex = 0;
+        let autoPlayTimer = null;
+        const autoPlayInterval = 4000; // Tempo di cambio in millisecondi (4 secondi)
 
         function updateRenderSlide() {
             const imgElement = document.getElementById('render-slide-img');
@@ -536,7 +538,23 @@
         function goToRenderSlide(index) {
             currentRenderIndex = index;
             updateRenderSlide();
+            resetAutoPlay(); // Riparte il conteggio da zero quando clicchi su un pallino
         }
+
+        // Gestione Auto-Play
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => {
+                changeRenderSlide(1);
+            }, autoPlayInterval);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // Avvio dello scorrimento automatico al caricamento della pagina
+        startAutoPlay();
 
         // Funzioni Lightbox
         function openLightbox(src) {
