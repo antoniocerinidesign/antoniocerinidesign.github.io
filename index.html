@@ -350,6 +350,14 @@
             transform: translateY(-3px);
         }
 
+        .card-project a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
         /* --- CAROSELLO PROGETTI PERSONALI --- */
         .header-left-group {
             display: flex;
@@ -862,31 +870,34 @@
                 
                 <div class="projects-carousel-track" id="projectTrack">
                     
-                    <!-- Riquadro 01 con Immagine Copertina e Titolo in Basso a Sinistra -->
+                    <!-- Riquadro 01 -->
                     <div class="card-project">
                         <a href="autoconcept.html">
                             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/01%20-%20AUTO%20CONCEPT.png?raw=true" alt="01 Auto Concept Cover" class="project-cover-img">
+                            <div class="project-title-badge">
+                                <h3>01 - AUTO CONCEPT</h3>
+                            </div>
                         </a>
-                        <div class="project-title-badge">
-                            <h3>01 - AUTO CONCEPT</h3>
-                        </div>
                     </div>
 
-                    <!-- Riquadro 02 con Immagine Copertina e Titolo in Basso a Sinistra -->
+                    <!-- Riquadro 02 -->
                     <div class="card-project">
                         <a href="haptic.html">
                             <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/02%20-%20HAPTIC.png?raw=true" alt="02 Haptic Cover" class="project-cover-img">
+                            <div class="project-title-badge">
+                                <h3>02 - HAPTIC</h3>
+                            </div>
                         </a>
-                        <div class="project-title-badge">
-                            <h3>02 - HAPTIC</h3>
-                        </div>
                     </div>
 
                     <!-- Riquadro 03 -->
                     <div class="card-project">
-                        <div>
-                            <h3>03 - NOME PROGETTO</h3>
-                        </div>
+                        <a href="gentalyn.html">
+                            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/03%20-%20GENTALYN%20BETA.png?raw=true" alt="03 Gentalyn Cover" class="project-cover-img">
+                            <div class="project-title-badge">
+                                <h3>03 - GENTALYN</h3>
+                            </div>
+                        </a>
                     </div>
 
                     <!-- Riquadro 04 -->
@@ -1232,55 +1243,3 @@
             document.addEventListener('keydown', (e) => {
                 if (lightboxModal.classList.contains('active')) {
                     if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowLeft') navigateLightbox(-1);
-                    if (e.key === 'ArrowRight') navigateLightbox(1);
-                }
-            });
-
-            // Logica Scorrimento Progetti Personali
-            const track = document.getElementById('projectTrack');
-            const prevSideBtn = document.getElementById('prevProjectSide');
-            const nextSideBtn = document.getElementById('nextProjectSide');
-
-            const getScrollAmount = () => track.clientWidth;
-
-            const scrollNext = () => {
-                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-            };
-
-            const scrollPrev = () => {
-                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-            };
-
-            if (nextSideBtn) nextSideBtn.addEventListener('click', scrollNext);
-            if (prevSideBtn) prevSideBtn.addEventListener('click', scrollPrev);
-
-            // Logica Modale Contatti
-            const modal = document.getElementById('contactModal');
-            const openBtn = document.getElementById('openContactModal');
-            const closeBtn = document.getElementById('closeContactModal');
-            const nextUrlInput = document.getElementById('nextUrl');
-
-            nextUrlInput.value = window.location.href;
-
-            openBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
