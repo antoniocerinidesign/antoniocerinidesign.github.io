@@ -212,47 +212,6 @@
             transform: scale(1.01);
         }
 
-        /* Sezione Concept Art */
-        .section-title {
-            width: 90vw;
-            max-width: 1600px;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #FFFFFF;
-            margin: 6rem 0 2.5rem 0;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 1rem;
-            text-align: left;
-        }
-
-        .concept-art-grid {
-            width: 90vw;
-            max-width: 1600px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .concept-art-item {
-            border: 1px solid var(--border-dark);
-            background-color: rgba(15, 15, 18, 0.7);
-            padding: 0.75rem;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            overflow: hidden;
-        }
-
-        .concept-art-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent-red);
-        }
-
         /* Stile Carosello RENDERS */
         .renders-carousel-section {
             width: 90vw;
@@ -425,12 +384,6 @@
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
             }
-            .concept-art-grid {
-                grid-template-columns: 1fr;
-            }
-            .concept-art-item {
-                height: 380px;
-            }
             .single-slide-wrapper {
                 height: 450px;
             }
@@ -510,13 +463,6 @@
                      alt="HAPTIC Sketch 01" 
                      onclick="openLightbox(this.src)">
             </div>
-        </div>
-
-        <h2 class="section-title">CONCEPT ART</h2>
-        <div class="concept-art-grid">
-            <div class="concept-art-item"></div>
-            <div class="concept-art-item"></div>
-            <div class="concept-art-item"></div>
         </div>
 
         <div class="renders-carousel-section">
