@@ -123,7 +123,7 @@
         .hero-image-wrapper {
             width: 90vw;
             max-width: 1600px;
-            height: 400px;
+            height: 800px;
             border: 1px solid var(--border-dark);
             background-color: rgba(0, 0, 0, 0.35);
             padding: 0.5rem;
@@ -141,6 +141,12 @@
             object-fit: cover;
             object-position: center;
             display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image-wrapper img:hover {
+            transform: scale(1.01);
         }
 
         /* Layout Affiancato: Testi a Sinistra, Sketch a Destra */
@@ -342,6 +348,15 @@
             cursor: zoom-out;
         }
 
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            cursor: default;
+        }
+
         /* Frecce Lightbox */
         .lightbox-arrow {
             position: absolute;
@@ -385,7 +400,7 @@
         /* Responsive */
         @media (max-width: 992px) {
             .hero-image-wrapper {
-                height: 280px;
+                height: 500px;
             }
             .sketch-wrapper {
                 min-height: 350px;
@@ -417,7 +432,7 @@
 
         @media (max-width: 600px) {
             .hero-image-wrapper {
-                height: 200px;
+                height: 300px;
             }
             .sketch-wrapper {
                 min-height: 250px;
@@ -456,7 +471,9 @@
 
     <main>
         <div class="hero-image-wrapper">
-            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/02%20-%20HAPTIC.png?raw=true" alt="02 — HAPTIC Bio-Material Steering Wheel Concept">
+            <img src="https://github.com/antoniocerinidesign/antoniocerinidesign.github.io/blob/main/02%20-%20HAPTIC.png?raw=true" 
+                 alt="02 — HAPTIC Bio-Material Steering Wheel Concept" 
+                 onclick="openLightbox(this.src)">
         </div>
 
         <div class="project-content-grid">
@@ -509,13 +526,14 @@
 
     </main>
 
-    <!-- Modal Lightbox (Modalità Ingrandita con Frecce) -->
+    <!-- Modal Lightbox (Modalità Ingrandita) -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Vista Ingrandita" onclick="event.stopPropagation()">
+
         <!-- Frecce Ingrandimento -->
         <span class="lightbox-arrow prev" onclick="event.stopPropagation(); changeLightboxSlide(-1);">&#10094;</span>
-        
         <span class="lightbox-arrow next" onclick="event.stopPropagation(); changeLightboxSlide(1);">&#10095;</span>
     </div>
 
@@ -528,6 +546,17 @@
         let autoPlayTimer = null;
         const autoPlayInterval = 4000;
         const totalSlides = 5;
+
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
 
         function updateRenderSlide() {
             const dots = document.querySelectorAll('#render-dots-container .dot');
@@ -567,10 +596,6 @@
         }
 
         startAutoPlay();
-
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
 
         // Supporto Tasti Freccia della Tastiera (Sinistra / Destra) e Tasto ESC
         document.addEventListener('keydown', function(e) {
