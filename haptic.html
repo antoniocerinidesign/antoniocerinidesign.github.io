@@ -11,10 +11,11 @@
 
     <style>
         :root {
-            --text-light: #F4F2ED;
-            --text-muted: #A0A0A0;
+            --text-main: #1D1D1F;
+            --text-muted: #6E6E73;
             --accent-red: #D9381E;
-            --border-dark: rgba(255, 255, 255, 0.12);
+            --border-light: rgba(0, 0, 0, 0.1);
+            --bg-card: #FFFFFF;
             
             --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --font-serif: 'Libre Baskerville', Georgia, serif;
@@ -29,9 +30,9 @@
 
         body {
             font-family: var(--font-body);
-            background: linear-gradient(180deg, #080808 0%, #1c1c1e 45%, #2c2d30 100%);
+            background: linear-gradient(180deg, #F5F5F7 0%, #E5E5E8 100%);
             background-attachment: fixed;
-            color: var(--text-light);
+            color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
@@ -46,7 +47,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.25rem 5%;
-            border-bottom: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-light);
             font-family: var(--font-display);
             font-size: 0.75rem;
             letter-spacing: 0.1em;
@@ -54,7 +55,7 @@
         }
 
         .back-btn {
-            color: var(--text-light);
+            color: var(--text-main);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -100,7 +101,7 @@
             letter-spacing: -0.02em;
             text-transform: uppercase;
             margin-bottom: 0.75rem;
-            color: #FFFFFF;
+            color: #111111;
         }
 
         .subtitle {
@@ -124,10 +125,10 @@
             width: 90vw;
             max-width: 1600px;
             height: 800px;
-            border: 1px solid var(--border-dark);
-            background-color: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-light);
+            background-color: var(--bg-card);
             padding: 0.5rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
             margin-bottom: 3.5rem;
             display: flex;
             align-items: center;
@@ -172,7 +173,7 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
             margin-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-light);
             padding-bottom: 0.5rem;
             display: inline-block;
         }
@@ -181,15 +182,15 @@
             font-family: var(--font-body);
             font-size: 1.05rem;
             line-height: 1.7;
-            color: var(--text-light);
+            color: var(--text-main);
             font-weight: 300;
         }
 
         .sketch-wrapper {
-            border: 1px solid var(--border-dark);
-            background-color: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-light);
+            background-color: var(--bg-card);
             padding: 0.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
             height: 100%;
             min-height: 450px;
             display: flex;
@@ -226,7 +227,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.25rem;
-            border-bottom: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-light);
             padding-bottom: 1rem;
         }
 
@@ -236,16 +237,16 @@
             font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: #FFFFFF;
+            color: #111111;
         }
 
         .single-slide-wrapper {
             position: relative;
             width: 100%;
             height: 650px;
-            background-color: rgba(15, 15, 18, 0.8);
-            border: 1px solid var(--border-dark);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -271,7 +272,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 2.5rem;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(0, 0, 0, 0.4);
             cursor: pointer;
             z-index: 20;
             padding: 15px;
@@ -296,17 +297,18 @@
             align-items: center;
             gap: 8px;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.8);
             padding: 6px 12px;
             border-radius: 20px;
             backdrop-filter: blur(4px);
+            border: 1px solid var(--border-light);
         }
 
         .carousel-dots-overlay .dot {
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            border: 1.5px solid rgba(0, 0, 0, 0.5);
             background-color: transparent;
             cursor: pointer;
             transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
@@ -339,7 +341,7 @@
             max-width: 90vw;
             max-height: 85vh;
             object-fit: contain;
-            border: 1px solid var(--border-dark);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
             cursor: default;
         }
@@ -370,7 +372,7 @@
             position: absolute;
             top: 25px;
             right: 35px;
-            color: var(--text-light);
+            color: #FFFFFF;
             font-size: 2.5rem;
             font-family: var(--font-display);
             font-weight: 300;
@@ -425,7 +427,7 @@
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border-dark);
+            border-top: 1px solid var(--border-light);
             padding: 2.5rem 5%;
             text-align: center;
             font-family: var(--font-display);
