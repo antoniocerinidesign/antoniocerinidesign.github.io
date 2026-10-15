@@ -123,7 +123,7 @@
         .hero-image-wrapper {
             width: 90vw;
             max-width: 1600px;
-            min-height: 600px;
+            height: 400px;
             border: 1px solid var(--border-dark);
             background-color: rgba(0, 0, 0, 0.35);
             padding: 0.5rem;
@@ -132,12 +132,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .hero-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             display: block;
         }
 
@@ -383,7 +385,7 @@
         /* Responsive */
         @media (max-width: 992px) {
             .hero-image-wrapper {
-                min-height: 380px;
+                height: 280px;
             }
             .sketch-wrapper {
                 min-height: 350px;
@@ -415,7 +417,7 @@
 
         @media (max-width: 600px) {
             .hero-image-wrapper {
-                min-height: 250px;
+                height: 200px;
             }
             .sketch-wrapper {
                 min-height: 250px;
